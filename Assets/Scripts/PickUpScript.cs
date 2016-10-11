@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(SteamVR_TrackedObject))]
 public class PickUpScript : MonoBehaviour {
    
     SteamVR_TrackedObject trackedObj;
     SteamVR_Controller.Device device;
+
+    public Transform sphere;
+
     // Use this for initialization
     void Awake ()
     {
@@ -13,7 +17,7 @@ public class PickUpScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
         device = SteamVR_Controller.Input((int)trackedObj.index);
         if(device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
@@ -21,9 +25,12 @@ public class PickUpScript : MonoBehaviour {
             Debug.Log("You are holding touch on the trigger");
         }
 
-        if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
+        if (device.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
         {
-            Debug.Log("You are holding touch on the trigger");
+            Debug.Log("You are holding touch on the touchpad");
+            sphere.transform.position = 
+            sphere.GetComponent<Rigidbody>().velocity = 
+            sphere.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
     }
 
@@ -42,6 +49,28 @@ public class PickUpScript : MonoBehaviour {
             Debug.Log("You have released Touch while colliding with " + col.name);
             col.gameObject.transform.SetParent(null);
             col.attachedRigidbody.isKinematic = false;
+
+            if(col.attachedRigidbody != null)
+            {
+                tossObject(col.attachedRigidbody);
+            }
+            
         }
+    }
+
+    private void tossObject(Rigidbody rigidbody)
+    {
+        Transform origin = trackedObj.origin ? trackedObj.origin : trackedObj.transform.parent;
+        if(origin != null)
+        {
+            rigidbody.velocity = origin.TransformVector(device.velocity);
+            rigidbody.angularVelocity = origin.TransformVector(device.angularVelocity);
+        }
+        else
+        {
+            rigidbody.velocity = device.velocity;
+            rigidbody.angularVelocity = device.angularVelocity;
+        }
+
     }
 }
