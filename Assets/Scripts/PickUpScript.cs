@@ -25,7 +25,7 @@ public class PickUpScript : MonoBehaviour {
             Debug.Log("You are holding touch on the trigger");
         }
 
-        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
+        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
         {
             Debug.Log("You are holding touch on the touchpad");
             sphere.transform.position = 
