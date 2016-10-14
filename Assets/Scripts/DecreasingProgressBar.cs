@@ -18,11 +18,21 @@ public class DecreasingProgressBar : MonoBehaviour
 	
 	IEnumerator DecreasePerSecond()
     {
-        while(progressValue != 0)
+        while (progressValue != 0)
         {
             progressValue -= decreasePerSec;
             yield return new WaitForSeconds(1.0f);
             Debug.Log("progress bar is at: " + progressValue + "%");
+        }
+    }
+
+    public void increaseForPush()
+    {
+        progressValue += 10;
+        if (progressValue >= 100)
+        {
+            Debug.Log("patient is breathing again! you win");
+
         }
     }
 }
