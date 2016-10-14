@@ -37,6 +37,8 @@ public class PickUpScript : MonoBehaviour {
             Debug.Log("You have collided with " + col.name + " while holding down the trigger");
             col.attachedRigidbody.isKinematic = true;
             col.gameObject.transform.SetParent(this.gameObject.transform);
+
+            //TO-DO: Limit movement to not go above or below certain Y coordinate
         }
 
         if(device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
