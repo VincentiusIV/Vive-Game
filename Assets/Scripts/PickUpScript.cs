@@ -50,7 +50,7 @@ public class PickUpScript : MonoBehaviour {
             }
         }
 
-        if (device.GetPress(SteamVR_Controller.ButtonMask.Grip))
+        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
         {
             Debug.Log("Grip was pressed while colliding with "+ col.name);
 
