@@ -26,7 +26,7 @@ public class PickUpScript : MonoBehaviour {
             Debug.Log("You are holding touch on the trigger");
         }
 
-        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
+        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip) && colObj.transform.position != resPosColObj.position)
         {
             Debug.Log("You are holding touch on the grip button");
             colObj.transform.position = 
@@ -39,11 +39,13 @@ public class PickUpScript : MonoBehaviour {
 
     void OnTriggerStay(Collider col)
     {
-        if(resPosColObj == null && colObj == null)
+        if(resPosColObj == null)
         {
             resPosColObj = col.transform;
+            Debug.Log("Reset position is: " + resPosColObj);
             colObj = col.gameObject;
         }
+        
 
         Debug.Log("You have collided with " + col.name + " and activated OnTriggerStay");
         if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
