@@ -61,11 +61,6 @@ public class PickUpScript : MonoBehaviour {
         }
     }
 
-    void OnTriggerExit()
-    {
-
-    }
-
     private void tossObject(Rigidbody rigidbody)
     {
         Transform origin = trackedObj.origin ? trackedObj.origin : trackedObj.transform.parent;

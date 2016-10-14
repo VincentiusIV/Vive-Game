@@ -23,6 +23,10 @@ public class DecreasingProgressBar : MonoBehaviour
             progressValue -= decreasePerSec;
             yield return new WaitForSeconds(1.0f);
             Debug.Log("progress bar is at: " + progressValue + "%");
+            if(progressValue <= 0)
+            {
+                Debug.Log("patient died! you lose");
+            }
         }
     }
 
@@ -33,7 +37,7 @@ public class DecreasingProgressBar : MonoBehaviour
         if (progressValue >= 100)
         {
             Debug.Log("patient is breathing again! you win");
-
+            progressValue = 100;
         }
     }
 }
