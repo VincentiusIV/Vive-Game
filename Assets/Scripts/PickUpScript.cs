@@ -49,8 +49,6 @@ public class PickUpScript : MonoBehaviour {
             {
                 tossObject(col.attachedRigidbody);
             }
-            
-            //col.GetComponent<Rigidbody>()
         }
     }
 
@@ -69,4 +67,5 @@ public class PickUpScript : MonoBehaviour {
         }
 
     }
+    
 }
