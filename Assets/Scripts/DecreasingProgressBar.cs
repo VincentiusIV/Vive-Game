@@ -29,6 +29,7 @@ public class DecreasingProgressBar : MonoBehaviour
     public void increaseForPush()
     {
         progressValue += 10;
+        Debug.Log("You pushed the chest");
         if (progressValue >= 100)
         {
             Debug.Log("patient is breathing again! you win");

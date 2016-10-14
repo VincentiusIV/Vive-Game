@@ -50,14 +50,13 @@ public class PickUpScript : MonoBehaviour {
             }
         }
 
-        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
+        if (device.GetPress(SteamVR_Controller.ButtonMask.Grip))
         {
-            Debug.Log("You are holding touch on the grip button");
+            Debug.Log("Grip was pressed while colliding with "+ col.name);
 
             if (col.CompareTag("Patient"))
             {
                 col.GetComponent<DecreasingProgressBar>().increaseForPush();
-                col = null;
             }
         }
     }
