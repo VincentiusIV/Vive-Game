@@ -23,10 +23,7 @@ public class PickUpScript : MonoBehaviour {
             Debug.Log("You are holding touch on the trigger");
         }
 
-        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
-        {
-            Debug.Log("You are holding touch on the grip button");
-        }
+        
     }
 
     void OnTriggerStay(Collider col)
@@ -40,7 +37,7 @@ public class PickUpScript : MonoBehaviour {
 
             //TO-DO: Limit movement to not go above or below certain Y coordinate
         }
-
+        
         if(device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
         {
             Debug.Log("You have released Touch while colliding with " + col.name);
@@ -52,6 +49,21 @@ public class PickUpScript : MonoBehaviour {
                 tossObject(col.attachedRigidbody);
             }
         }
+
+        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
+        {
+            Debug.Log("Grip was pressed while colliding with "+ col.name);
+
+            if (col.CompareTag("Patient"))
+            {
+                col.GetComponent<DecreasingProgressBar>().increaseForPush();
+            }
+        }
+    }
+
+    void OnTriggerExit()
+    {
+
     }
 
     private void tossObject(Rigidbody rigidbody)

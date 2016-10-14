@@ -1,94 +1,85 @@
 fileFormatVersion: 2
-guid: fe19ed72c5a8a8941890b7d4b5128bb5
-timeCreated: 1476439617
+guid: b59bf9729f8c42f4e9bd6e7bdd44c11a
+timeCreated: 1476444019
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Box001
-    100002: Box003
-    100004: Box004
-    100006: Box005
-    100008: Chair
-    100010: Cylinder001
-    100012: Desk Lamp
+    100000: Chair
+    100002: Desk
+    100004: Desk Lamp
+    100006: Drawer Bottom
+    100008: Drawer Top
+    100010: Folder
+    100012: Marker
     100014: miAreaLightomni001
-    100016: Object002
-    100018: Object003
-    100020: Object004
-    100022: Object005
-    100024: Object006
-    100026: Object007
-    100028: Object008
-    100030: //RootNode
-    100032: Office Room
-    100034: PC Monitor
-    100036: Sky001
-    100038: Spot001
-    100040: Spot001.Target
-    400000: Box001
-    400002: Box003
-    400004: Box004
-    400006: Box005
-    400008: Chair
-    400010: Cylinder001
-    400012: Desk Lamp
+    100016: //RootNode
+    100018: Office Room
+    100020: Paper
+    100022: PC Monitor
+    100024: Phone
+    100026: Sky001
+    100028: Spot001
+    100030: Spot001.Target
+    100032: TrashCan
+    100034: Whiteboard
+    400000: Chair
+    400002: Desk
+    400004: Desk Lamp
+    400006: Drawer Bottom
+    400008: Drawer Top
+    400010: Folder
+    400012: Marker
     400014: miAreaLightomni001
-    400016: Object002
-    400018: Object003
-    400020: Object004
-    400022: Object005
-    400024: Object006
-    400026: Object007
-    400028: Object008
-    400030: //RootNode
-    400032: Office Room
-    400034: PC Monitor
-    400036: Sky001
-    400038: Spot001
-    400040: Spot001.Target
-    2300000: Box001
-    2300002: Box003
-    2300004: Box004
-    2300006: Box005
-    2300008: Chair
-    2300010: Cylinder001
-    2300012: Desk Lamp
-    2300014: Object002
-    2300016: Object003
-    2300018: Object006
-    2300020: Object007
-    2300022: Object008
-    2300024: Office Room
-    2300026: PC Monitor
-    3300000: Box001
-    3300002: Box003
-    3300004: Box004
-    3300006: Box005
-    3300008: Chair
-    3300010: Cylinder001
-    3300012: Desk Lamp
-    3300014: Object002
-    3300016: Object003
-    3300018: Object006
-    3300020: Object007
-    3300022: Object008
-    3300024: Office Room
-    3300026: PC Monitor
+    400016: //RootNode
+    400018: Office Room
+    400020: Paper
+    400022: PC Monitor
+    400024: Phone
+    400026: Sky001
+    400028: Spot001
+    400030: Spot001.Target
+    400032: TrashCan
+    400034: Whiteboard
+    2300000: Chair
+    2300002: Desk
+    2300004: Desk Lamp
+    2300006: Drawer Bottom
+    2300008: Drawer Top
+    2300010: Folder
+    2300012: Marker
+    2300014: Office Room
+    2300016: Paper
+    2300018: PC Monitor
+    2300020: Phone
+    2300022: TrashCan
+    2300024: Whiteboard
+    3300000: Chair
+    3300002: Desk
+    3300004: Desk Lamp
+    3300006: Drawer Bottom
+    3300008: Drawer Top
+    3300010: Folder
+    3300012: Marker
+    3300014: Office Room
+    3300016: Paper
+    3300018: PC Monitor
+    3300020: Phone
+    3300022: TrashCan
+    3300024: Whiteboard
     4300000: Chair
     4300002: Office Room
     4300004: PC Monitor
-    4300006: Box001
-    4300008: Object002
-    4300010: Object003
-    4300012: Box003
+    4300006: TrashCan
+    4300008: Drawer Bottom
+    4300010: Phone
+    4300012: Whiteboard
     4300014: Desk Lamp
-    4300016: Cylinder001
-    4300018: Box004
-    4300020: Box005
-    4300022: Object006
-    4300024: Object007
-    4300026: Object008
+    4300016: Marker
+    4300018: Paper
+    4300020: Desk
+    4300022: Drawer Top
+    4300024: Folder
   materials:
     importMaterials: 1
     materialName: 0
