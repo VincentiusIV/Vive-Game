@@ -8,9 +8,6 @@ public class PickUpScript : MonoBehaviour {
     SteamVR_TrackedObject trackedObj;
     SteamVR_Controller.Device device;
 
-    private GameObject colObj;
-    private Transform resPosColObj;
-
     // Use this for initialization
     void Awake ()
     {
@@ -26,27 +23,14 @@ public class PickUpScript : MonoBehaviour {
             Debug.Log("You are holding touch on the trigger");
         }
 
-        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip) && colObj != null)
+        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
         {
             Debug.Log("You are holding touch on the grip button");
-            colObj.transform.position = 
-            colObj.GetComponent<Rigidbody>().velocity =
-            colObj.GetComponent<Rigidbody>().angularVelocity = resPosColObj.position;
-
-            resPosColObj = null;
         }
     }
 
     void OnTriggerStay(Collider col)
     {
-        if(resPosColObj == null)
-        {
-            resPosColObj = col.transform;
-            Debug.Log("Reset position is: " + resPosColObj);
-            colObj = col.gameObject;
-        }
-        
-
         Debug.Log("You have collided with " + col.name + " and activated OnTriggerStay");
         if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
         {
