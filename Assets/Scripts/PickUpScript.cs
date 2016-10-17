@@ -28,35 +28,42 @@ public class PickUpScript : MonoBehaviour {
 
     void OnTriggerStay(Collider col)
     {
-        Debug.Log("You have collided with " + col.name + " and activated OnTriggerStay");
-        if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
+        if (col.tag == "VrController")
         {
-            Debug.Log("You have collided with " + col.name + " while holding down the trigger");
-            col.attachedRigidbody.isKinematic = true;
-            col.gameObject.transform.SetParent(this.gameObject.transform);
-
-            //TO-DO: Limit movement to not go above or below certain Y coordinate
+            return;
         }
-        
-        if(device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
+        else
         {
-            Debug.Log("You have released Touch while colliding with " + col.name);
-            col.gameObject.transform.SetParent(null);
-            col.attachedRigidbody.isKinematic = false;
-
-            if(col.attachedRigidbody != null)
+            Debug.Log("You have collided with " + col.name + " and activated OnTriggerStay");
+            if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
             {
-                tossObject(col.attachedRigidbody);
+                Debug.Log("You have collided with " + col.name + " while holding down the trigger");
+                col.attachedRigidbody.isKinematic = true;
+                col.gameObject.transform.SetParent(this.gameObject.transform);
+
+                //TO-DO: Limit movement to not go above or below certain Y coordinate
             }
-        }
 
-        if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
-        {
-            Debug.Log("Grip was pressed while colliding with "+ col.name);
-
-            if (col.CompareTag("Patient"))
+            if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
             {
-                col.GetComponent<DecreasingProgressBar>().increaseForPush();
+                Debug.Log("You have released Touch while colliding with " + col.name);
+                col.gameObject.transform.SetParent(null);
+                col.attachedRigidbody.isKinematic = false;
+
+                if (col.attachedRigidbody != null)
+                {
+                    tossObject(col.attachedRigidbody);
+                }
+            }
+
+            if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
+            {
+                Debug.Log("Grip was pressed while colliding with " + col.name);
+
+                if (col.CompareTag("Patient"))
+                {
+                    col.GetComponent<DecreasingProgressBar>().increaseForPush();
+                }
             }
         }
     }
