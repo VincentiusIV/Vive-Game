@@ -67,7 +67,7 @@ public class DecreasingProgressBar : MonoBehaviour
             if (increase)
             {
                 effectiveness += 1;
-                if(effectiveness >= 10)
+                if(effectiveness >= 11)
                 {
                     increase = false;
                     decrease = true;
@@ -77,7 +77,7 @@ public class DecreasingProgressBar : MonoBehaviour
             if (decrease)
             {
                 effectiveness -= 1;
-                if (effectiveness <= -5)
+                if (effectiveness <= -4)
                 {
                     increase = true;
                     decrease = false;
