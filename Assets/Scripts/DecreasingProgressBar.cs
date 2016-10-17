@@ -84,7 +84,7 @@ public class DecreasingProgressBar : MonoBehaviour
             }
 
             yield return new WaitForSeconds(1/15);
-            Debug.Log("effectiveness = ": effectiveness);
+            Debug.Log("effectiveness = "+ effectiveness);
         } 
     }
 }
