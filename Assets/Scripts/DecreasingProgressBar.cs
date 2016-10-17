@@ -20,6 +20,7 @@ public class DecreasingProgressBar : MonoBehaviour
             progressValue = 100;
         }
         StartCoroutine(DecreasePerSecond());
+        StartCoroutine(checkEffectiveness());
 	}
 	
 	IEnumerator DecreasePerSecond()
