@@ -5,32 +5,29 @@ using UnityEngine.SceneManagement;
 public class ButtonHandler : MonoBehaviour
 {
 
-
-    public bool scene1;
-    public bool scene2;
-    public bool scene3;
-
-
-
+    public bool GameScene;
+    public bool OfficeScene;
+    public bool MenuScene;
+    
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "VrController")
         {
             Debug.Log("Collider has VrController tag.");
-            if (scene1 == true)
+            if (GameScene == true)
             {
-                Debug.Log("Scene1 == true");
+                Debug.Log("GameScene == true");
                 SceneManager.LoadScene("Game");
                 Debug.Log("Game scene loaded");
             }
-            else if (scene2 == true)
+            else if (OfficeScene == true)
             {
-                Debug.Log("Scene 2 == true");
+                Debug.Log("OfficeScene 2 == true");
                 SceneManager.LoadScene("Office Scene");
                 Debug.Log("office scene loaded.");
             }
-            else if (scene3 == true)
+            else if (MenuScene == true)
             {
                 Debug.Log("scene3 == true");
                 SceneManager.LoadScene("Main Menu");
