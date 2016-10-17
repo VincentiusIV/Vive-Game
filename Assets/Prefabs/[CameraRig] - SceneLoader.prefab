@@ -147,7 +147,7 @@ GameObject:
   - 33: {fileID: 33000013314297912}
   - 114: {fileID: 114000012495029558}
   m_Layer: 0
-  m_Name: '[CameraRig]'
+  m_Name: '[CameraRig] - SceneLoader'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
