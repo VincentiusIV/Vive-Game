@@ -22,8 +22,6 @@ public class PickUpScript : MonoBehaviour {
         {
             Debug.Log("You are holding touch on the trigger");
         }
-
-        
     }
 
     void OnTriggerStay(Collider col)
@@ -64,6 +62,11 @@ public class PickUpScript : MonoBehaviour {
                 {
                     col.GetComponent<DecreasingProgressBar>().increaseForPush();
                 }
+            }
+
+            if(Input.GetButtonDown("Fire2"))
+            {
+                col.GetComponent<DecreasingProgressBar>().increaseForPush();
             }
         }
     }
