@@ -3,14 +3,16 @@ using System.Collections;
 
 public class DecreasingProgressBar : MonoBehaviour
 {
-    public int progressValue;
-    public int decreasePerSec;
+    public float progressValue;
+    public float decreasePerSec;
 
     private bool patientAlive;
     private int effectiveness;
 
-	// Use this for initialization
-	void Start ()
+    private bool increase = true;
+    private bool decrease = false;
+    // Use this for initialization
+    void Start ()
     {
         patientAlive = true;
         effectiveness = 0;
@@ -25,11 +27,12 @@ public class DecreasingProgressBar : MonoBehaviour
 	
 	IEnumerator DecreasePerSecond()
     {
-        while (progressValue != 0 || patientAlive == false)
+        while (progressValue != 0 && patientAlive)
         {
             progressValue -= decreasePerSec;
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds((decreasePerSec * 2) / 10);
             Debug.Log("progress bar is at: " + progressValue + "%");
+
             if(progressValue <= 0)
             {
                 Debug.Log("patient died! you lose");
@@ -61,13 +64,10 @@ public class DecreasingProgressBar : MonoBehaviour
     {
         while(true)
         {
-            bool increase = true;
-            bool decrease = false;
-
             if (increase)
             {
                 effectiveness += 1;
-                if(effectiveness >= 11)
+                if(effectiveness >= 10)
                 {
                     increase = false;
                     decrease = true;
