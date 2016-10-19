@@ -52,6 +52,10 @@ public class PickUpScript : MonoBehaviour {
                 {
                     tossObject(col.attachedRigidbody);
                 }
+                if (col.CompareTag("SnapPosition"))
+                {
+                    col.GetComponent<SnapScript>().SnapToPosition(this.gameObject);
+                }
             }
 
             if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
@@ -61,10 +65,6 @@ public class PickUpScript : MonoBehaviour {
                 if (col.CompareTag("Patient"))
                 {
                     col.GetComponent<DecreasingProgressBar>().increaseForPush();
-                }
-                if (col.CompareTag("SnapPosition"))
-                {
-                    col.GetComponent<SnapScript>().SnapToPosition(this.gameObject);
                 }
             }
 
