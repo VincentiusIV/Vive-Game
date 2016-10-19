@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Patient
   - VrController
+  - SnapPosition
   layers:
   - Default
   - TransparentFX

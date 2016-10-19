@@ -2,8 +2,8 @@
 using System.Collections;
 using Valve.VR;
 
-public class ControllerScene : MonoBehaviour {
-
+public class ControllerScene : MonoBehaviour
+{
     SteamVR_TrackedObject obj;
 
     public GameObject ButtonHolder;
@@ -28,7 +28,6 @@ public class ControllerScene : MonoBehaviour {
                 ButtonEnabled = true;
                 ButtonHolder.SetActive(true);
                 Debug.Log("ButtonEnabled and ButtonHolder active state set to TRUE");
-
             }
             else if (ButtonEnabled == true)
             {
