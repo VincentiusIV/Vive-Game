@@ -3,8 +3,8 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(SteamVR_TrackedObject))]
-public class PickUpScript : MonoBehaviour {
-   
+public class PickUpScript : MonoBehaviour
+{
     SteamVR_TrackedObject trackedObj;
     SteamVR_Controller.Device device;
 
@@ -23,9 +23,7 @@ public class PickUpScript : MonoBehaviour {
     void OnTriggerStay(Collider col)
     {
         if (col.tag == "VrController")
-        {
-            return;
-        }
+        { return; } 
         else
         {
             Debug.Log("You have collided with " + col.name + " and activated OnTriggerStay");
@@ -46,6 +44,10 @@ public class PickUpScript : MonoBehaviour {
                 {
                     tossObject(col.attachedRigidbody);
                 }
+                if(col.gameObject.GetComponent<CompareTags>().isColSnap == true)
+                {
+                    col.gameObject.GetComponent<CompareTags>().canSnap = true;
+                }
             }
 
             if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
@@ -57,18 +59,18 @@ public class PickUpScript : MonoBehaviour {
                     col.GetComponent<DecreasingProgressBar>().increaseForPush();
                 }
             }
+        }
 
-            if(Input.GetButtonDown("Fire2"))
-            {
-                col.GetComponent<DecreasingProgressBar>().increaseForPush();
-            }
+        if(Input.GetButtonDown("Fire2"))
+        {
+            col.GetComponent<DecreasingProgressBar>().increaseForPush();
         }
     }
 
-    private void tossObject(Rigidbody rigidbody)
+    public void tossObject(Rigidbody rigidbody)
     {
         Transform origin = trackedObj.origin ? trackedObj.origin : trackedObj.transform.parent;
-        if(origin != null)
+        if (origin != null)
         {
             rigidbody.velocity = origin.TransformVector(device.velocity);
             rigidbody.angularVelocity = origin.TransformVector(device.angularVelocity);
@@ -78,7 +80,9 @@ public class PickUpScript : MonoBehaviour {
             rigidbody.velocity = device.velocity;
             rigidbody.angularVelocity = device.angularVelocity;
         }
-
     }
-    
 }
+
+ 
+    
+

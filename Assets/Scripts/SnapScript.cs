@@ -3,8 +3,7 @@ using System.Collections;
 
 public class SnapScript : MonoBehaviour
 {
-    private Transform snapPosition;
-    public GameObject parent;
+    /*private Transform snapPosition;
 
     public void SnapToPosition(GameObject _obj)
     {
@@ -12,6 +11,5 @@ public class SnapScript : MonoBehaviour
 
         _obj.transform.position = snapPosition.position;
         _obj.transform.rotation = snapPosition.rotation;
-        _obj.transform.SetParent(parent.transform);
-    }
+    }*/
 }
