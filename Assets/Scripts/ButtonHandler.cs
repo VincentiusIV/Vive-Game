@@ -9,33 +9,21 @@ public class ButtonHandler : MonoBehaviour
     public bool OfficeScene;
     public bool MenuScene;
     
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "VrController")
-        {
-            Debug.Log("Collider has VrController tag.");
-            if (GameScene == true)
-            {
-                Debug.Log("GameScene == true");
+    /*
+     * Method used for the switching of scenes. OnTriggerEnter is called whenever collision happens
+     * A check is the performed to see if the colliding object is the controller, if true it checks which scene is being tapped and then it's loaded.     * 
+     */
+    void OnTriggerEnter(Collider other) {
+        if (other.tag == "VrController") {
+            if (GameScene == true) {
                 SceneManager.LoadScene("Game");
-                Debug.Log("Game scene loaded");
             }
-            else if (OfficeScene == true)
-            {
-                Debug.Log("OfficeScene 2 == true");
+            else if (OfficeScene == true) {
                 SceneManager.LoadScene("Office Scene");
-                Debug.Log("office scene loaded.");
             }
-            else if (MenuScene == true)
-            {
-                Debug.Log("scene3 == true");
+            else if (MenuScene == true) {
                 SceneManager.LoadScene("Main Menu");
-                Debug.Log("Main menu scene loaded.");
             }
         }
     }
-
-
-
 }
