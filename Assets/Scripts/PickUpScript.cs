@@ -8,7 +8,6 @@ public class PickUpScript : MonoBehaviour {
     SteamVR_TrackedObject trackedObj;
     SteamVR_Controller.Device device;
 
-    private bool doThrow;
     // Use this for initialization
     void Awake ()
     {
@@ -19,10 +18,6 @@ public class PickUpScript : MonoBehaviour {
 	void FixedUpdate ()
     {
         device = SteamVR_Controller.Input((int)trackedObj.index);
-        if(device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
-        {
-            Debug.Log("You are holding touch on the trigger");
-        }
     }
     
     void OnTriggerStay(Collider col)
@@ -46,14 +41,8 @@ public class PickUpScript : MonoBehaviour {
                 Debug.Log("You have released Trigger while colliding with " + col.name);
                 col.gameObject.transform.SetParent(null);
                 col.attachedRigidbody.isKinematic = false;
-                
-                if(col.CompareTag("Snap Position"))
-                {
-                    doThrow = false;
-                }
-                else { doThrow = true; }
-                
-                if (col.attachedRigidbody != null && doThrow)
+
+                if (col.attachedRigidbody != null)
                 {
                     tossObject(col.attachedRigidbody);
                 }
