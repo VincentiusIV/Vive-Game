@@ -42,7 +42,7 @@ public class PickUpScript : MonoBehaviour {
 
             if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
             {
-                Debug.Log("You have released Touch while colliding with " + col.name);
+                Debug.Log("You have released Trigger while colliding with " + col.name);
                 col.gameObject.transform.SetParent(null);
                 col.attachedRigidbody.isKinematic = false;
 
@@ -51,6 +51,7 @@ public class PickUpScript : MonoBehaviour {
                     tossObject(col.attachedRigidbody);
                 }
                 
+
             }
 
             if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
@@ -70,6 +71,14 @@ public class PickUpScript : MonoBehaviour {
         }
     }
 
+    void OnTriggerExit(Collider col)
+    {
+        if (col.CompareTag("SnapPosition") && device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
+        {
+            Debug.Log("Other tag is SnapPosition");
+            col.GetComponent<SnapScript>().SnapToPosition(col.gameObject);
+        }
+    }
     private void tossObject(Rigidbody rigidbody)
     {
         Transform origin = trackedObj.origin ? trackedObj.origin : trackedObj.transform.parent;
