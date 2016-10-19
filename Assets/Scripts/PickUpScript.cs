@@ -23,7 +23,7 @@ public class PickUpScript : MonoBehaviour {
             Debug.Log("You are holding touch on the trigger");
         }
     }
-
+    
     void OnTriggerStay(Collider col)
     {
         if (col.tag == "VrController")
@@ -38,8 +38,6 @@ public class PickUpScript : MonoBehaviour {
                 Debug.Log("You have collided with " + col.name + " while holding down the trigger");
                 col.attachedRigidbody.isKinematic = true;
                 col.gameObject.transform.SetParent(this.gameObject.transform);
-
-                //TO-DO: Limit movement to not go above or below certain Y coordinate
             }
 
             if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
@@ -54,7 +52,8 @@ public class PickUpScript : MonoBehaviour {
                 }
                 if (col.CompareTag("SnapPosition"))
                 {
-                    col.GetComponent<SnapScript>().SnapToPosition(this.gameObject);
+                    Debug.Log("Other tag is SnapPosition");
+                    col.GetComponent<SnapScript>().SnapToPosition(col.gameObject);
                 }
             }
 
