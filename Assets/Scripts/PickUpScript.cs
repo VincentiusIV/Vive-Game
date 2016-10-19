@@ -32,6 +32,11 @@ public class PickUpScript : MonoBehaviour
                 Debug.Log("You have collided with " + col.name + " while holding down the trigger");
                 col.attachedRigidbody.isKinematic = true;
                 col.gameObject.transform.SetParent(this.gameObject.transform);
+
+                if (col.gameObject.GetComponent<CompareTags>().isColSnap == true)
+                {
+                    col.gameObject.GetComponent<CompareTags>().canSnap = false;
+                }
             }
 
             if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
