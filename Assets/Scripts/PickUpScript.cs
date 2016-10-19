@@ -71,14 +71,6 @@ public class PickUpScript : MonoBehaviour {
         }
     }
 
-    void OnTriggerExit(Collider col)
-    {
-        if (col.CompareTag("SnapPosition") && device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
-        {
-            Debug.Log("Other tag is SnapPosition");
-            col.GetComponent<SnapScript>().SnapToPosition(col.gameObject);
-        }
-    }
     private void tossObject(Rigidbody rigidbody)
     {
         Transform origin = trackedObj.origin ? trackedObj.origin : trackedObj.transform.parent;

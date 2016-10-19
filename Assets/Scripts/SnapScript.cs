@@ -12,6 +12,6 @@ public class SnapScript : MonoBehaviour
 
         _obj.transform.position = snapPosition.position;
         _obj.transform.rotation = snapPosition.rotation;
-        //_obj.transform.SetParent(parent.transform);
+        _obj.transform.SetParent(null);
     }
 }
