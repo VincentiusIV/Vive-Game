@@ -62,6 +62,10 @@ public class PickUpScript : MonoBehaviour {
                 {
                     col.GetComponent<DecreasingProgressBar>().increaseForPush();
                 }
+                if (col.CompareTag("SnapPosition"))
+                {
+                    col.GetComponent<SnapScript>().SnapToPosition(this.gameObject);
+                }
             }
 
             if(Input.GetButtonDown("Fire2"))

@@ -15,9 +15,6 @@ public class CompareTags : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.CompareTag("SnapPosition"))
-        {
-            col.GetComponent<SnapScript>().SnapToPosition(this.gameObject);
-        }
+        
     }
 }
