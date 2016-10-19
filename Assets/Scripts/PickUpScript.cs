@@ -50,11 +50,7 @@ public class PickUpScript : MonoBehaviour {
                 {
                     tossObject(col.attachedRigidbody);
                 }
-                if (col.CompareTag("SnapPosition"))
-                {
-                    Debug.Log("Other tag is SnapPosition");
-                    col.GetComponent<SnapScript>().SnapToPosition(col.gameObject);
-                }
+                
             }
 
             if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))

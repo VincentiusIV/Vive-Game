@@ -3,8 +3,9 @@ using System.Collections;
 
 public class CompareTags : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    SteamVR_Controller.Device device;
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -13,8 +14,12 @@ public class CompareTags : MonoBehaviour {
 	
 	}
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerStay(Collider col)
     {
-        
+        if (col.CompareTag("SnapPosition") && device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
+        {
+            Debug.Log("Other tag is SnapPosition");
+            col.GetComponent<SnapScript>().SnapToPosition(this.gameObject);
+        }
     }
 }
