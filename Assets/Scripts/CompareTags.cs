@@ -7,7 +7,7 @@ public class CompareTags : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (col.CompareTag("SnapPosition") && triggerUp)
+        if (col.CompareTag("SnapPosition"))
         {
             Debug.Log("Other tag is SnapPosition");
             col.GetComponent<SnapScript>().SnapToPosition(col.gameObject);
