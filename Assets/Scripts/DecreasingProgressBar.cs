@@ -3,89 +3,83 @@ using System.Collections;
 
 public class DecreasingProgressBar : MonoBehaviour
 {
-    public int progressValue;
-    public int decreasePerSec;
+    public float progressValue;
+    public float decreasePerMs;
 
-    private bool patientAlive;
+    private bool runBar;
     private int effectiveness;
 
-	// Use this for initialization
-	void Start ()
+    private bool increase = true;
+    private bool decrease = false;
+    // Use this for initialization
+    void Start ()
     {
-        patientAlive = true;
-        effectiveness = 0;
+        runBar = true;
 
-	    if(progressValue == 0)
-        {
-            progressValue = 100;
-        }
+        Debug.Log("runBar in Start() = " + runBar);
         StartCoroutine(DecreasePerSecond());
         StartCoroutine(checkEffectiveness());
 	}
-	
+
 	IEnumerator DecreasePerSecond()
     {
-        while (progressValue != 0 || patientAlive == false)
+        // runs continously while runBar == true
+        while (progressValue > 0 || progressValue < 100)
         {
-            progressValue -= decreasePerSec;
-            yield return new WaitForSeconds(1.0f);
+            progressValue -= decreasePerMs;
             Debug.Log("progress bar is at: " + progressValue + "%");
-            if(progressValue <= 0)
+
+            if (progressValue <= 0)
             {
                 Debug.Log("patient died! you lose");
-                patientAlive = false;
+                //runBar = false;
             }
+            if (progressValue >= 100)
+            {
+                Debug.Log("patient is alive! you win");
+                //runBar = false;
+            }
+            yield return new WaitForSeconds(1.0f);
         }
+        
     }
 
     public void increaseForPush()
     {
-        if(patientAlive)
+        if (progressValue > 0 || progressValue < 100)
         {
             progressValue += effectiveness;
-            Debug.Log("You pushed the chest");
+            Debug.Log("You pushed the chest and improved health by: "+effectiveness);
 
-            if (progressValue >= 100)
-            {
-                Debug.Log("Patient is breathing again! you win");
-                progressValue = 100;
-            }
-        }
-        else
-        {
-            Debug.Log("Patient is dead");
+            effectiveness = -5;
+            increase = true;
+            decrease = false;
         }
     }
 
     IEnumerator checkEffectiveness()
     {
-        while(true)
+        while(progressValue > 0 || progressValue < 100)
         {
-            bool increase = true;
-            bool decrease = false;
-
             if (increase)
             {
                 effectiveness += 1;
-                if(effectiveness >= 11)
+                if(effectiveness >= 10)
                 {
                     increase = false;
                     decrease = true;
                 }
             }
-
             if (decrease)
             {
                 effectiveness -= 1;
-                if (effectiveness <= -4)
+                if (effectiveness <= -6)
                 {
                     increase = true;
                     decrease = false;
                 }
             }
-
             yield return new WaitForSeconds(1/15);
-            Debug.Log("effectiveness = "+ effectiveness);
         } 
     }
 }
