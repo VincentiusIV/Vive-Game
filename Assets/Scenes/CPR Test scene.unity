@@ -152,7 +152,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &761522002
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,8 +298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb03e8ae4af14394685505ca3d134d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressValue: 100
-  decreasePerSec: 0.5
+  progressValue: 50
+  decreasePerMs: 1
 --- !u!54 &1121113053
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -467,6 +467,15 @@ Prefab:
         type: 2}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013846511628, guid: 9c69e61830465f04cb5840e8b450aa0e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012733421370, guid: 9c69e61830465f04cb5840e8b450aa0e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 33000013036907512, guid: 9c69e61830465f04cb5840e8b450aa0e, type: 2}
