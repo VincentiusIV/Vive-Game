@@ -6,7 +6,7 @@ public class DecreasingProgressBar : MonoBehaviour
     public float progressValue;
     public float decreasePerSec;
 
-    private bool patientAlive;
+    private bool alive;
     private int effectiveness;
 
     private bool increase = true;
@@ -14,7 +14,7 @@ public class DecreasingProgressBar : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        patientAlive = true;
+        alive = true;
         effectiveness = 0;
 
 	    if(progressValue == 0)
@@ -27,7 +27,7 @@ public class DecreasingProgressBar : MonoBehaviour
 	
 	IEnumerator DecreasePerSecond()
     {
-        while (progressValue != 0 && patientAlive)
+        while (progressValue != 0 && alive)
         {
             progressValue -= decreasePerSec;
             yield return new WaitForSeconds((decreasePerSec * 2) / 10);
@@ -36,33 +36,35 @@ public class DecreasingProgressBar : MonoBehaviour
             if(progressValue <= 0)
             {
                 Debug.Log("patient died! you lose");
-                patientAlive = false;
+                alive = false;
             }
         }
     }
 
     public void increaseForPush()
     {
-        if(patientAlive)
+        if(alive)
         {
             progressValue += effectiveness;
             Debug.Log("You pushed the chest");
 
-            if (progressValue >= 100)
+            if (progressValue > 100)
             {
                 Debug.Log("Patient is breathing again! you win");
                 progressValue = 100;
+                alive = false;
             }
         }
         else
         {
-            Debug.Log("Patient is dead");
+            Debug.Log("Patient no longer needs pushing");
         }
+        
     }
 
     IEnumerator checkEffectiveness()
     {
-        while(true)
+        while(alive)
         {
             if (increase)
             {
