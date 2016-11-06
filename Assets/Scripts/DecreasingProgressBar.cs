@@ -3,8 +3,9 @@ using System.Collections;
 
 public class DecreasingProgressBar : MonoBehaviour
 {
-    public float progressValue;
-    public float decreasePerSec;
+    public GameObject progressBar;
+
+    private float timer;
 
     private bool alive;
     private int effectiveness;
@@ -14,51 +15,24 @@ public class DecreasingProgressBar : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        alive = true;
-        effectiveness = 0;
-
-	    if(progressValue == 0)
-        {
-            progressValue = 100;
-        }
-        StartCoroutine(DecreasePerSecond());
-        StartCoroutine(checkEffectiveness());
+        timer = 0.9f;
 	}
-	
-	IEnumerator DecreasePerSecond()
-    {
-        while (progressValue != 0 && alive)
-        {
-            progressValue -= decreasePerSec;
-            yield return new WaitForSeconds((decreasePerSec * 2) / 10);
-            Debug.Log("progress bar is at: " + progressValue + "%");
 
-            if(progressValue <= 0)
-            {
-                Debug.Log("patient died! you lose");
-                alive = false;
-            }
+    void Update()
+    {
+        if(timer > 0.0f)
+        {
+            timer -= Time.deltaTime;
         }
+        else
+        {
+            timer = 0.0f;
+        }
+        progressBar.transform.localScale = new Vector3(timer, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
     }
 
     public void increaseForPush()
     {
-        if(alive)
-        {
-            progressValue += effectiveness;
-            Debug.Log("You pushed the chest");
-
-            if (progressValue > 100)
-            {
-                Debug.Log("Patient is breathing again! you win");
-                progressValue = 100;
-                alive = false;
-            }
-        }
-        else
-        {
-            Debug.Log("Patient no longer needs pushing");
-        }
         
     }
 
