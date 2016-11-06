@@ -7,7 +7,6 @@ public class DecreasingProgressBar : MonoBehaviour
 
     private float timer;
 
-    private bool alive;
     private int effectiveness;
 
     private bool increase = true;
@@ -20,7 +19,7 @@ public class DecreasingProgressBar : MonoBehaviour
 
     void Update()
     {
-        if(timer > 0.0f)
+        if(timer > 0.05f)
         {
             timer -= Time.deltaTime;
         }
@@ -38,7 +37,7 @@ public class DecreasingProgressBar : MonoBehaviour
 
     IEnumerator checkEffectiveness()
     {
-        while(alive)
+        while(true)
         {
             if (increase)
             {
