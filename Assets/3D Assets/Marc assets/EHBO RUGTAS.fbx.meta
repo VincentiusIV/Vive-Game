@@ -1,16 +1,11 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
-guid: 0c8eecfe09b784c49b666975a76367c4
-timeCreated: 1478386371
+guid: f67ded53929d4e14a89eddef2d07c841
+timeCreated: 1476741145
 =======
-<<<<<<< HEAD
-guid: 3a454ecc19d00f54c83ca9be0b60ef61
-timeCreated: 1478194283
-=======
-guid: 3f5d5c5fec3dfc74b99f62379d14b410
+guid: 663416f85f83b324d82fb47542bcd063
 timeCreated: 1478254070
 >>>>>>> befd61d3014086886aa7866b219f37ac783122d1
->>>>>>> d82bcdf586a1119d5a37e9f663a1935655c8fdd2
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -20,7 +15,6 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Box001
-    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -79,7 +73,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

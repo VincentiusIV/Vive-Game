@@ -6,15 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: lade texture
+  m_Name: bed texture
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-<<<<<<< HEAD
-  m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 1
-=======
   m_ShaderKeywords: 
   m_LightmapFlags: 5
->>>>>>> d82bcdf586a1119d5a37e9f663a1935655c8fdd2
   m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:

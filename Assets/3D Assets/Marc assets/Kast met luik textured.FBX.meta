@@ -1,6 +1,16 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: d135a291f7af7d845b0da3ac8e7c6d90
 timeCreated: 1478395939
+=======
+<<<<<<< HEAD
+guid: 42f7f4377f7890544855142ccdc70573
+timeCreated: 1478194283
+=======
+guid: 429b13f40614da045a32229b3ef28b57
+timeCreated: 1478254070
+>>>>>>> befd61d3014086886aa7866b219f37ac783122d1
+>>>>>>> d82bcdf586a1119d5a37e9f663a1935655c8fdd2
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -39,7 +49,11 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
+<<<<<<< HEAD
     swapUVChannels: 1
+=======
+    swapUVChannels: 0
+>>>>>>> d82bcdf586a1119d5a37e9f663a1935655c8fdd2
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1

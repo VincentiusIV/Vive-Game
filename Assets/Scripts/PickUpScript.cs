@@ -74,6 +74,7 @@ public class PickUpScript : MonoBehaviour
             }
         }
 
+        // call IncreaseForPush when Fire2 is pressed
         if(Input.GetButtonDown("Fire2"))
         {
             col.GetComponent<DecreasingProgressBar>().increaseForPush();
