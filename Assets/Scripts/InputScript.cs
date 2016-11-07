@@ -74,7 +74,7 @@ public class InputScript : MonoBehaviour
 
                 if (col.CompareTag("Patient"))
                 {
-                    col.GetComponent<DecreasingProgressBar>().increaseForPush();
+                    col.GetComponent<PatientScript>().increaseForPush();
                 }
             }
         }
@@ -82,7 +82,7 @@ public class InputScript : MonoBehaviour
         // call IncreaseForPush when Jump is pressed
         if (Input.GetButtonDown("Jump"))
         {
-            col.GetComponent<DecreasingProgressBar>().increaseForPush();
+            col.GetComponent<PatientScript>().increaseForPush();
         }
     }
 

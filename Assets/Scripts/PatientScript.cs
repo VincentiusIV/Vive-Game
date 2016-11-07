@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 using System.Collections;
 
-public class DecreasingProgressBar : MonoBehaviour
+public class PatientScript : MonoBehaviour
 {
     public GameObject progressBar;
 
@@ -11,6 +11,7 @@ public class DecreasingProgressBar : MonoBehaviour
 
     private bool increase = true;
     private bool decrease = false;
+
     // Use this for initialization
     void Start ()
     {
