@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(SteamVR_TrackedObject))]
-public class PickUpScript : MonoBehaviour
+public class InputScript : MonoBehaviour
 {
     SteamVR_TrackedObject trackedObj;
     SteamVR_Controller.Device device;
@@ -18,6 +18,11 @@ public class PickUpScript : MonoBehaviour
 	void FixedUpdate ()
     {
         device = SteamVR_Controller.Input((int)trackedObj.index);
+    }
+
+    void Update ()
+    {
+        
     }
     
     void OnTriggerStay(Collider col)
@@ -74,8 +79,8 @@ public class PickUpScript : MonoBehaviour
             }
         }
 
-        // call IncreaseForPush when Fire2 is pressed
-        if(Input.GetButtonDown("Fire2"))
+        // call IncreaseForPush when Jump is pressed
+        if (Input.GetButtonDown("Jump"))
         {
             col.GetComponent<DecreasingProgressBar>().increaseForPush();
         }
