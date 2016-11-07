@@ -704,6 +704,7 @@ GameObject:
   - 54: {fileID: 54000012137041542}
   - 135: {fileID: 135000012995466766}
   - 114: {fileID: 114000013487288856}
+  - 114: {fileID: 114000014023283862}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: VrController
@@ -1821,7 +1822,7 @@ MonoBehaviour:
   Pointer: {fileID: 0}
   OriginTransform: {fileID: 4000010406208952}
   HeadTransform: {fileID: 4000010720676064}
-  TeleportFadeDuration: 0.2
+  TeleportFadeDuration: 0.7
   HapticClickAngleStep: 10
   NavmeshAnimator: {fileID: 0}
   FadeMaterial: {fileID: 2100000, guid: 5ba70d58d085f2b44b315edf2d739376, type: 2}
@@ -1935,6 +1936,24 @@ MonoBehaviour:
   BorderMaterial: {fileID: 0}
   BorderAlpha: 1
   _BorderHeight: 0.2
+--- !u!114 &114000014023283862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014251172976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e8a839a7c5b7e4580c59e305fb5f01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  color: {r: 0.15862082, g: 1, b: 0, a: 0}
+  thickness: 0.002
+  holder: {fileID: 0}
+  pointer: {fileID: 0}
+  addRigidBody: 0
+  reference: {fileID: 0}
 --- !u!124 &124000014105169922
 Behaviour:
   m_ObjectHideFlags: 1
