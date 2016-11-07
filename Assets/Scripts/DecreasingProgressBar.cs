@@ -28,6 +28,7 @@ public class DecreasingProgressBar : MonoBehaviour
             timer = 0.0f;
         }
         progressBar.transform.localScale = new Vector3(timer, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+        progressBar.transform.Translate(new Vector3((timer / 2), progressBar.transform.position.y, progressBar.transform.position.z));
     }
 
     public void increaseForPush()
