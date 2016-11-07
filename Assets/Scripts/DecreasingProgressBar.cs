@@ -14,7 +14,7 @@ public class DecreasingProgressBar : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        timer = 0.9f;
+        timer = 10.0f;
 	}
 
     void Update()
@@ -27,13 +27,12 @@ public class DecreasingProgressBar : MonoBehaviour
         {
             timer = 0.0f;
         }
-        progressBar.transform.localScale = new Vector3(timer, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
-        progressBar.transform.Translate(new Vector3((timer / 2), progressBar.transform.position.y, progressBar.transform.position.z));
+        progressBar.transform.localScale = new Vector3( timer / 10, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
     }
 
     public void increaseForPush()
     {
-        
+        timer += 1;
     }
 
     IEnumerator checkEffectiveness()
