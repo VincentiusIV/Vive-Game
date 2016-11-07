@@ -130,7 +130,9 @@ GameObject:
   - 4: {fileID: 4000013922300220}
   - 20: {fileID: 20000013761123850}
   - 124: {fileID: 124000014105169922}
-  - 114: {fileID: 114000011579831060}
+  - 114: {fileID: 114000012994390132}
+  - 114: {fileID: 114000012417569198}
+  - 114: {fileID: 114000013315590176}
   m_Layer: 0
   m_Name: Camera (eye)
   m_TagString: MainCamera
@@ -681,6 +683,8 @@ GameObject:
   - 20: {fileID: 20000013186553458}
   - 114: {fileID: 114000011950468242}
   - 92: {fileID: 92000013609400702}
+  - 114: {fileID: 114000010543770748}
+  - 114: {fileID: 114000013817912824}
   m_Layer: 0
   m_Name: Camera (head)
   m_TagString: MainCamera
@@ -1644,6 +1648,25 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013833946802}
   m_Enabled: 1
+--- !u!114 &114000010543770748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013833946802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a200554d92bd8e54792301df3fcaf328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pointer: {fileID: 0}
+  OriginTransform: {fileID: 0}
+  HeadTransform: {fileID: 0}
+  TeleportFadeDuration: 0.2
+  HapticClickAngleStep: 10
+  NavmeshAnimator: {fileID: 0}
+  FadeMaterial: {fileID: 0}
+  Controllers: []
 --- !u!114 &114000010613731758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1704,20 +1727,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vrcam: {fileID: 0}
---- !u!114 &114000011579831060
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010698510446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bca9ccf900ccc84c887d783321d27e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _head: {fileID: 4000010720676064}
-  _ears: {fileID: 4000010903236036}
-  wireframe: 0
 --- !u!114 &114000011950468242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1760,6 +1769,20 @@ MonoBehaviour:
   GameScene: 0
   OfficeScene: 0
   MenuScene: 1
+--- !u!114 &114000012417569198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010698510446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8feef0f746cf91a46b8fac4e2b747347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BorderMaterial: {fileID: 0}
+  BorderAlpha: 1
+  _BorderHeight: 0.2
 --- !u!114 &114000012536980132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1784,6 +1807,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa30b03c94fe54488395a4275a5dc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000012994390132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010698510446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a200554d92bd8e54792301df3fcaf328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pointer: {fileID: 0}
+  OriginTransform: {fileID: 4000010406208952}
+  HeadTransform: {fileID: 4000010720676064}
+  TeleportFadeDuration: 0.2
+  HapticClickAngleStep: 10
+  NavmeshAnimator: {fileID: 0}
+  FadeMaterial: {fileID: 2100000, guid: 5ba70d58d085f2b44b315edf2d739376, type: 2}
+  Controllers:
+  - {fileID: 114000013212721670}
+  - {fileID: 114000010652272646}
 --- !u!114 &114000013212721670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1798,6 +1842,20 @@ MonoBehaviour:
   index: -1
   origin: {fileID: 0}
   isValid: 0
+--- !u!114 &114000013315590176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010698510446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bca9ccf900ccc84c887d783321d27e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _head: {fileID: 4000010720676064}
+  _ears: {fileID: 4000010903236036}
+  wireframe: 0
 --- !u!114 &114000013452626068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1863,6 +1921,20 @@ MonoBehaviour:
   - {x: 1.65, y: 0.01, z: -1.275}
   - {x: -1.65, y: 0.01, z: -1.275}
   - {x: -1.65, y: 0.01, z: 1.275}
+--- !u!114 &114000013817912824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013833946802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8feef0f746cf91a46b8fac4e2b747347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BorderMaterial: {fileID: 0}
+  BorderAlpha: 1
+  _BorderHeight: 0.2
 --- !u!124 &124000014105169922
 Behaviour:
   m_ObjectHideFlags: 1
