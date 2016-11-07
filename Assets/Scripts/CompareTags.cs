@@ -35,12 +35,11 @@ public class CompareTags : MonoBehaviour
     void OnTriggerExit(Collider col)
     {
         isColSnap = false;
-        col.GetComponent<MeshRenderer>().enabled = false;
-        this.transform.SetParent(null);
     }
 
     private void SnapToPosition(Collider col)
     {
+        col.GetComponent<MeshRenderer>().enabled = false;
         this.transform.position = col.transform.position;
         this.transform.rotation = col.transform.rotation;
         this.transform.SetParent(null);
