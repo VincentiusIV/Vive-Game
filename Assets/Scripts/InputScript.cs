@@ -21,9 +21,17 @@ public class InputScript : MonoBehaviour
         device = SteamVR_Controller.Input((int)trackedObj.index);
     }
 
-    void Update ()
+    void Update()
     {
-        
+        if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
+        {
+            animator.SetBool("Grab", true);
+        }
+        if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
+        {
+            animator.SetBool("Grab", false);
+        }
+
     }
 
     void OnTriggerStay(Collider col)
@@ -35,7 +43,7 @@ public class InputScript : MonoBehaviour
             // runs when trigger is held down
             if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
             {
-                animator.SetBool("Grab", true);
+                
                 col.attachedRigidbody.isKinematic = true;
                 col.gameObject.transform.SetParent(this.gameObject.transform);
 
@@ -51,7 +59,7 @@ public class InputScript : MonoBehaviour
             // runs when trigger is released
             if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
             {
-                animator.SetBool("Grab", false);
+                
 
                 col.gameObject.transform.SetParent(null);
                 col.attachedRigidbody.isKinematic = false;
