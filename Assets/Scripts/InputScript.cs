@@ -13,44 +13,32 @@ public class InputScript : MonoBehaviour
     void Awake ()
     {
         trackedObj = GetComponent<SteamVR_TrackedObject>();
-	}
+        animator = GetComponent<Animator>();
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
         device = SteamVR_Controller.Input((int)trackedObj.index);
-        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger) || Input.GetButtonDown("Jump"))
+        if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
         {
-            if (animator.GetBool("Grab") == false)
-            {
-                animator.SetBool("Grab", true);
-            }
+            SetAnimation("Grab", false, true);
         }
         if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
         {
-            if (animator.GetBool("Grab") == true)
-            {
-                animator.SetBool("Grab", false);
-            }
+            SetAnimation("Grab", true, false);
         }
         if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
         {
-            if (animator.GetBool("Pinch") == false)
-            {
-                animator.SetBool("Pinch", true);
-            }
+            SetAnimation("Pinch", false, true);
         }
         if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
         {
-            if (animator.GetBool("Pinch") == true)
-            {
-                animator.SetBool("Pinch", false);
-            }
+            SetAnimation("Pinch", true, false);
         }
     }
 
@@ -115,6 +103,14 @@ public class InputScript : MonoBehaviour
             {
                 col.GetComponent<PatientScript>().increaseForPush();
             }
+        }
+    }
+
+    void SetAnimation(String varName, bool whenIts, bool ItShouldBe)
+    {
+        if (animator.GetBool(varName) == whenIts)
+        {
+            animator.SetBool(varName, ItShouldBe);
         }
     }
 

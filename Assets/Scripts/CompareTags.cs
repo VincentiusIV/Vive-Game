@@ -10,24 +10,20 @@ public class CompareTags : MonoBehaviour
     
     // Bool that lets the InputScript know if this object collided with SnapPosition
     public bool isColSnap;
-
+    
     // Bool that is set in the InputScript when the trigger button is released
     public bool canSnap;
 
+    // List of bools for special SnapPositions
+    public bool isStretcher;
+
     void OnTriggerStay(Collider col)
     {
-        if (col.CompareTag("SnapPosition"))
-        {
-            Debug.Log("Other tag is SnapPosition");
-            
-            isColSnap = true;
+        PreSnapping(col);
 
-            Stretcher(col);
-            
-            if(canSnap)
-            {
-                SnapToPosition(col);
-            }
+        if(isStretcher)
+        {
+            col.GetComponent<PatientScript>().isOnStretcher = true;
         }
     }
 
@@ -35,22 +31,24 @@ public class CompareTags : MonoBehaviour
     {
         isColSnap = false;
     }
+    
+    void PreSnapping(Collider _col)
+    {
+        isColSnap = true;
 
+        this.GetComponent<MeshRenderer>().enabled = true;
+
+        if (canSnap)
+        {
+            SnapToPosition(_col);
+            this.GetComponent<MeshRenderer>().enabled = false;
+        }
+    }
+    
     private void SnapToPosition(Collider col)
     {
-        col.GetComponent<MeshRenderer>().enabled = false;
-        this.transform.position = col.transform.position;
-        this.transform.rotation = col.transform.rotation;
-        this.transform.SetParent(null);
-    }
-
-    void Stretcher(Collider _col)
-    {
-        if (_col.CompareTag("Stretcher"))
-        {
-            _col.GetComponent<MeshRenderer>().enabled = true;
-            _col.GetComponent<PatientScript>().isOnStretcher = true;
-            this.transform.SetParent(_col.transform.parent);
-        }
+        col.transform.position = this.transform.position;
+        col.transform.rotation = this.transform.rotation;
+        col.transform.SetParent(this.transform.parent);
     }
 }

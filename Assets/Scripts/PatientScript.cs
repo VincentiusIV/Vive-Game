@@ -43,6 +43,12 @@ public class PatientScript : MonoBehaviour
         timer += 1;
     }
 
+    // Function that should run when the patient is on the stretcher
+    void OnStretcher()
+    {
+
+    }
+
     IEnumerator checkEffectiveness()
     {
         while(true)
