@@ -1,4 +1,4 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class PatientScript : MonoBehaviour
@@ -35,12 +35,19 @@ public class PatientScript : MonoBehaviour
             progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
         }
         
+        if(Input.GetButtonUp("Jump"))
+        {
+            increaseForPush();
+        }
     }
 
     public void increaseForPush()
     {
         Debug.Log("You increased for push ");
-        timer += 1;
+        if(timer <= 10)
+        {
+            timer += effectiveness;
+        }
     }
 
     // Function that should run when the patient is on the stretcher
@@ -51,30 +58,28 @@ public class PatientScript : MonoBehaviour
 
     IEnumerator checkEffectiveness()
     {
-        while(true)
+        if (increase)
         {
-            if (increase)
+            effectiveness += 1;
+            if(effectiveness >= 10)
             {
-                effectiveness += 1;
-                if(effectiveness >= 10)
-                {
-                    increase = false;
-                    decrease = true;
-                }
+                increase = false;
+                decrease = true;
             }
+        }
 
-            if (decrease)
+        if (decrease)
+        {
+            effectiveness -= 1;
+            if (effectiveness <= -4)
             {
-                effectiveness -= 1;
-                if (effectiveness <= -4)
-                {
-                    increase = true;
-                    decrease = false;
-                }
+                increase = true;
+                decrease = false;
             }
+        }
 
-            yield return new WaitForSeconds(1/15);
-            Debug.Log("effectiveness = "+ effectiveness);
-        } 
+        yield return new WaitForSeconds(1/15);
+        Debug.Log("effectiveness = "+ effectiveness);
+        
     }
 }

@@ -97,12 +97,6 @@ public class InputScript : MonoBehaviour
                     col.GetComponent<PatientScript>().increaseForPush();
                 }
             }
-
-            // call IncreaseForPush when Jump is pressed
-            if (Input.GetButtonDown("Jump"))
-            {
-                col.GetComponent<PatientScript>().increaseForPush();
-            }
         }
     }
 
