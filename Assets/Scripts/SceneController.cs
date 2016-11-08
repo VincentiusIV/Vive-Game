@@ -2,13 +2,12 @@
 using System.Collections;
 using Valve.VR;
 
-public class ControllerScene : MonoBehaviour { 
+public class SceneController : MonoBehaviour { 
     SteamVR_TrackedObject obj;
 
     public GameObject ButtonHolder;
     public bool ButtonEnabled;
 
-    //Called upon initialization 
 	void Awake() {
         obj = GetComponent<SteamVR_TrackedObject>();
         ButtonHolder.SetActive(false);

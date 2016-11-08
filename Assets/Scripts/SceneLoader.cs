@@ -2,12 +2,14 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class ButtonHandler : MonoBehaviour
+public class SceneLoader : MonoBehaviour
 {
 
     public bool GameScene;
     public bool OfficeScene;
     public bool MenuScene;
+    public bool AnimationTest;
+    public bool Field;
     
     /*
      * Method used for the switching of scenes. OnTriggerEnter is called whenever collision happens
@@ -15,14 +17,22 @@ public class ButtonHandler : MonoBehaviour
      */
     void OnTriggerEnter(Collider other) {
         if (other.tag == "VrController") {
-            if (GameScene == true) {
+            if (GameScene) {
                 SceneManager.LoadScene("Game Test Scene");
             }
-            else if (OfficeScene == true) {
+            else if (OfficeScene) {
                 SceneManager.LoadScene("Office Scene");
             }
-            else if (MenuScene == true) {
+            else if (MenuScene) {
                 SceneManager.LoadScene("Main Menu");
+            }
+            else if (AnimationTest)
+            {
+                SceneManager.LoadScene("AnimationTest");
+            }
+            else if (Field)
+            {
+                SceneManager.LoadScene("Field");
             }
         }
     }
