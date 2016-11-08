@@ -4,6 +4,7 @@ using System.Collections;
 public class PatientScript : MonoBehaviour
 {
     public GameObject progressBar;
+    public bool isOnStretcher;
 
     private float timer;
 
@@ -11,7 +12,7 @@ public class PatientScript : MonoBehaviour
 
     private bool increase = true;
     private bool decrease = false;
-
+    
     // Use this for initialization
     void Start ()
     {
@@ -28,11 +29,16 @@ public class PatientScript : MonoBehaviour
         {
             timer = 0.0f;
         }
-        progressBar.transform.localScale = new Vector3( timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+        if(isOnStretcher)
+        {
+            progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+        }
+        
     }
 
     public void increaseForPush()
     {
+        Debug.Log("You increased for push ");
         timer += 1;
     }
 

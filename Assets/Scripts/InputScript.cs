@@ -63,7 +63,6 @@ public class InputScript : MonoBehaviour
             // runs when trigger is held down
             if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
             {
-                
                 col.attachedRigidbody.isKinematic = true;
                 col.gameObject.transform.SetParent(this.gameObject.transform);
 
@@ -79,8 +78,6 @@ public class InputScript : MonoBehaviour
             // runs when trigger is released
             if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
             {
-                
-
                 col.gameObject.transform.SetParent(null);
                 col.attachedRigidbody.isKinematic = false;
 
