@@ -8,7 +8,7 @@ public class InputScript : MonoBehaviour
     SteamVR_TrackedObject trackedObj;
     SteamVR_Controller.Device device;
 
-    public Animator animator;
+    private Animator animator;
     // Use this for initialization
     void Awake ()
     {
@@ -19,11 +19,12 @@ public class InputScript : MonoBehaviour
 	void FixedUpdate ()
     {
         device = SteamVR_Controller.Input((int)trackedObj.index);
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
+        if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger) || Input.GetButtonDown("Jump"))
         {
             animator.SetBool("Grab", true);
         }

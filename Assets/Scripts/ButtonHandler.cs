@@ -16,7 +16,7 @@ public class ButtonHandler : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         if (other.tag == "VrController") {
             if (GameScene == true) {
-                SceneManager.LoadScene("Game");
+                SceneManager.LoadScene("Game Test Scene");
             }
             else if (OfficeScene == true) {
                 SceneManager.LoadScene("Office Scene");

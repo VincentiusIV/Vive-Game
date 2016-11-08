@@ -9,5 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Office Scene.unity
   - enabled: 1
     path: Assets/Scenes/Main menu.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game.unity
+  - enabled: 1
+    path: Assets/Scenes/Game Test Scene.unity
