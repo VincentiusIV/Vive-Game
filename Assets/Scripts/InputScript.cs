@@ -25,17 +25,17 @@ public class InputScript : MonoBehaviour
     {
         
     }
-    
+
     void OnTriggerStay(Collider col)
     {
         if (col.tag == "VrController")
-        { return; } 
+        { return; }
         else
         {
             // runs when trigger is held down
             if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
             {
-                animator.SetBool(1, true);
+                animator.SetBool("Grab", true);
                 col.attachedRigidbody.isKinematic = true;
                 col.gameObject.transform.SetParent(this.gameObject.transform);
 
@@ -51,7 +51,8 @@ public class InputScript : MonoBehaviour
             // runs when trigger is released
             if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
             {
-                Debug.Log("You have released Trigger while colliding with " + col.name);
+                animator.SetBool("Grab", false);
+
                 col.gameObject.transform.SetParent(null);
                 col.attachedRigidbody.isKinematic = false;
 
@@ -64,27 +65,31 @@ public class InputScript : MonoBehaviour
                  * is colliding with a SnapPosition.
                  * This makes the object able to snap onto the SnapPosition when the trigger is released.
                  */
-                if(col.gameObject.GetComponent<CompareTags>().isColSnap == true)
+                if (col.gameObject.GetComponent<CompareTags>().isColSnap == true)
                 {
                     col.gameObject.GetComponent<CompareTags>().canSnap = true;
                 }
             }
 
+            if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+            {
+                animator.SetBool("Pinch", true);
+            }
             if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
             {
-                Debug.Log("Grip was pressed while colliding with " + col.name);
+                animator.SetBool("Pinch", false);
 
                 if (col.CompareTag("Patient"))
                 {
                     col.GetComponent<PatientScript>().increaseForPush();
                 }
             }
-        }
 
-        // call IncreaseForPush when Jump is pressed
-        if (Input.GetButtonDown("Jump"))
-        {
-            col.GetComponent<PatientScript>().increaseForPush();
+            // call IncreaseForPush when Jump is pressed
+            if (Input.GetButtonDown("Jump"))
+            {
+                col.GetComponent<PatientScript>().increaseForPush();
+            }
         }
     }
 
