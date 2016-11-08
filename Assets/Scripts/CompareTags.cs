@@ -22,9 +22,8 @@ public class CompareTags : MonoBehaviour
             
             isColSnap = true;
 
-            col.GetComponent<MeshRenderer>().enabled = true;
-            this.transform.SetParent(col.transform.parent);
-
+            Stretcher(col);
+            
             if(canSnap)
             {
                 SnapToPosition(col);
@@ -43,5 +42,15 @@ public class CompareTags : MonoBehaviour
         this.transform.position = col.transform.position;
         this.transform.rotation = col.transform.rotation;
         this.transform.SetParent(null);
+    }
+
+    void Stretcher(Collider _col)
+    {
+        if (_col.CompareTag("Stretcher"))
+        {
+            _col.GetComponent<MeshRenderer>().enabled = true;
+            _col.GetComponent<PatientScript>().isOnStretcher = true;
+            this.transform.SetParent(_col.transform.parent);
+        }
     }
 }

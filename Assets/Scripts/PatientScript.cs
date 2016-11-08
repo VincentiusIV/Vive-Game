@@ -17,6 +17,7 @@ public class PatientScript : MonoBehaviour
     void Start ()
     {
         timer = 100.0f;
+        isOnStretcher = false;
 	}
 
     void Update()
