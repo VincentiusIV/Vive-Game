@@ -26,11 +26,17 @@ public class InputScript : MonoBehaviour
     {
         if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger) || Input.GetButtonDown("Jump"))
         {
-            animator.SetBool("Grab", true);
+            if(animator.GetBool("Grab") == false)
+            {
+                animator.SetBool("Grab", true);
+            }
         }
         if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
         {
-            animator.SetBool("Grab", false);
+            if(animator.GetBool("Grab") == true)
+            {
+                animator.SetBool("Grab", false);
+            }
         }
 
     }
