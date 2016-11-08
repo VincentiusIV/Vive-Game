@@ -8,6 +8,7 @@ public class InputScript : MonoBehaviour
     SteamVR_TrackedObject trackedObj;
     SteamVR_Controller.Device device;
 
+    public Animator animator;
     // Use this for initialization
     void Awake ()
     {
@@ -34,6 +35,7 @@ public class InputScript : MonoBehaviour
             // runs when trigger is held down
             if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
             {
+                animator.SetBool(1, true);
                 col.attachedRigidbody.isKinematic = true;
                 col.gameObject.transform.SetParent(this.gameObject.transform);
 
