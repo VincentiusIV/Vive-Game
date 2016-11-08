@@ -7,7 +7,6 @@ TagManager:
   - Patient
   - VrController
   - SnapPosition
-  - Stretcher
   layers:
   - Default
   - TransparentFX
