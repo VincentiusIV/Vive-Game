@@ -15,7 +15,7 @@ public class PatientScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        timer = 10.0f;
+        timer = 100.0f;
 	}
 
     void Update()
@@ -28,7 +28,7 @@ public class PatientScript : MonoBehaviour
         {
             timer = 0.0f;
         }
-        progressBar.transform.localScale = new Vector3( timer / 10, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+        progressBar.transform.localScale = new Vector3( timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
     }
 
     public void increaseForPush()
