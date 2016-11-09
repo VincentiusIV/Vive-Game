@@ -21,7 +21,7 @@ public class CompareTags : MonoBehaviour
     {
         PreSnapping(col);
 
-        if(isStretcher)
+        if(isStretcher && col.CompareTag("Patient"))
         {
             col.GetComponent<PatientScript>().isOnStretcher = true;
         }
@@ -30,6 +30,7 @@ public class CompareTags : MonoBehaviour
     void OnTriggerExit(Collider col)
     {
         isColSnap = false;
+        this.GetComponent<MeshRenderer>().enabled = false;
     }
     
     void PreSnapping(Collider _col)
