@@ -57,7 +57,7 @@ public class InputScript : MonoBehaviour
                 /* This is for objects that have already been snapped into place by the player
                  * canSnap is reset so the player can pick up the object that has been snapped before
                  */
-                if (col.gameObject.GetComponent<SnapScript>()._isColSnap == true)
+                if (col.gameObject.GetComponent<SnapScript>()._isColSnap == true && col.gameObject.GetComponent<SnapScript>()._isPatient != true)
                 {
                     col.gameObject.GetComponent<SnapScript>()._canSnap = false;
                 }

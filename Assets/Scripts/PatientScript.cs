@@ -6,12 +6,15 @@ public class PatientScript : MonoBehaviour
     public GameObject progressBar;
     public GameObject EffectText;
 
+    public GameObject pushArea;
+    public GameObject pinchArea;
+
     public bool isOnStretcher;
 
     private float timer;
-
+    private int timesCompressed;
+    private int timesSuccesCompres;
     private int effectiveness;
-
     private bool inCondition;
 
     // Use this for initialization
@@ -58,7 +61,9 @@ public class PatientScript : MonoBehaviour
 
     public void increaseForPush()
     {
-        Debug.Log("You increased for push ");
+        timesCompressed += 1;
+        Debug.Log("You increased for push for the "+timesCompressed+"th time");
+
         if(timer <= 90)
         {
             timer += effectiveness;
@@ -74,14 +79,12 @@ public class PatientScript : MonoBehaviour
 
     IEnumerator checkEffective()
     {
+        float timeBetween = 0.33f;
         effectiveness = -5;
-
-        yield return new WaitForSeconds(1.0f );
-
+        yield return new WaitForSeconds(timeBetween);
         effectiveness = 0;
-
-        yield return new WaitForSeconds(1.0f);
-
-        effectiveness = 50;
+        yield return new WaitForSeconds(timeBetween);
+        effectiveness = 10;
+        yield return new WaitForSeconds(timeBetween);
     }
 }
