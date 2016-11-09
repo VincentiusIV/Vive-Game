@@ -46,6 +46,7 @@ public class PatientScript : MonoBehaviour
             {
                 increaseForPush();
             }
+
             EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
         }
 
