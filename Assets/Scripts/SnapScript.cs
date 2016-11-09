@@ -4,9 +4,7 @@
  * somewhere. This checks whether or not the object can be snapped onto the
  * colliding trigger.
  */
-public class SnapScript : MonoBehaviour
+public class PatientScript : MonoBehaviour
 {
-    public bool _isColSnap;
-    public bool _canSnap;
-    public bool _isPatient;
+    
 }

@@ -10,6 +10,9 @@ public class PatientScript : MonoBehaviour
     public GameObject pinchArea;
 
     public bool isOnStretcher;
+    public bool isColSnap;
+    public bool canSnap;
+    public bool isPatient;
 
     private float timer;
     private int timesCompressed;

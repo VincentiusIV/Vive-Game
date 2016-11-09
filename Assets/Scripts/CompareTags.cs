@@ -23,16 +23,16 @@ public class CompareTags : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        col.GetComponent<SnapScript>()._isColSnap = false;
+        col.GetComponent<PatientScript>().isColSnap = false;
         this.GetComponent<MeshRenderer>().enabled = false;
     }
     
     void PreSnapping(Collider _col)
     {
-        _col.GetComponent<SnapScript>()._isColSnap = true;
+        _col.GetComponent<PatientScript>().isColSnap = true;
         this.GetComponent<MeshRenderer>().enabled = true;
 
-        if (_col.GetComponent<SnapScript>()._canSnap)
+        if (_col.GetComponent<PatientScript>().canSnap)
         {
             SnapToPosition(_col);
             this.GetComponent<MeshRenderer>().enabled = false;
