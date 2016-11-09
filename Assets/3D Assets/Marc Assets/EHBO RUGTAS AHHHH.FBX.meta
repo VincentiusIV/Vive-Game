@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 76931e6e3b63df640b9f6438233e04c2
-timeCreated: 1478689865
+guid: c8139641899c8864695fb9c14c930c88
+timeCreated: 1478396541
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -39,7 +39,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
-    swapUVChannels: 0
+    swapUVChannels: 1
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
