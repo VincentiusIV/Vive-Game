@@ -46,6 +46,17 @@ public class InputScript : MonoBehaviour
     {
         if (col.tag == "VrController")
         { return; }
+        else if(col.CompareTag("InteractableArea"))
+        {
+            if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+            {
+                col.transform.position = new Vector3(col.transform.position.x, col.transform.position.y, this.transform.position.z );
+            }
+            if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
+            {
+
+            }
+        }
         else
         {
             // runs when trigger is held down
@@ -84,19 +95,7 @@ public class InputScript : MonoBehaviour
                 }
             }
 
-            if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
-            {
-                animator.SetBool("Pinch", true);
-            }
-            if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
-            {
-                animator.SetBool("Pinch", false);
-
-                if (col.CompareTag("Patient"))
-                {
-                    //col.GetComponent<PatientScript>().increaseForPush();
-                }
-            }
+            
         }
     }
 

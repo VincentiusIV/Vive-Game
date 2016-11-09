@@ -8,7 +8,7 @@ TagManager:
   - VrController
   - SnapPosition
   - Stretcher
-  - Hand
+  - InteractableArea
   layers:
   - Default
   - TransparentFX

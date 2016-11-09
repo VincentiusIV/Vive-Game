@@ -6,8 +6,8 @@ public class PatientScript : MonoBehaviour
     public GameObject progressBar;
     public GameObject EffectText;
 
-    public GameObject pushArea;
-    public GameObject pinchArea;
+    public Transform pushArea;
+    public Transform pinchArea;
 
     public bool isOnStretcher;
     public bool isColSnap;
@@ -15,11 +15,13 @@ public class PatientScript : MonoBehaviour
     public bool isPatient;
 
     private float timer;
-    private int timesCompressed;
-    private int timesSuccesCompres;
+    private int timeCompres;
+    private int timeSucCompres;
+    private int timeUnsucCompres;
+
     private int effectiveness;
     private bool inCondition;
-
+    private bool chestCompressed;
     // Use this for initialization
     void Start ()
     {
@@ -31,24 +33,35 @@ public class PatientScript : MonoBehaviour
 
     void Update()
     {
-        if(inCondition)
+        if (timer > 0.05f)
         {
-            if (timer > 0.05f)
-            {
-                timer -= Time.deltaTime;
-            }
-            else
-            {
-                timer = 0.0f;
-            }
+            timer -= Time.deltaTime;
+        }
+        else
+        {
+            timer = 0.0f;
+        }
+
+        if (inCondition)
+        {
             if (isOnStretcher)
             {
                 progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
             }
 
-            if (Input.GetButtonUp("Jump"))
+            if (Input.GetButtonDown("Jump") || pushArea.transform.position.z < 0.15f)
             {
-                increaseForPush();
+                Debug.Log("chest compressed");
+                if(chestCompressed == false)
+                {
+                    increaseForPush();
+                    chestCompressed = true;
+                }
+            }
+            if(Input.GetButtonUp("Jump") || pushArea.transform.position.z > 0.2f)
+            {
+                Debug.Log("PushArea is above 0.2");
+                chestCompressed = false;
             }
 
             EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
@@ -64,20 +77,24 @@ public class PatientScript : MonoBehaviour
 
     public void increaseForPush()
     {
-        timesCompressed += 1;
-        Debug.Log("You increased for push for the "+timesCompressed+"th time");
+        timeCompres += 1;
+        Debug.Log("You increased for push for the "+timeCompres+"th time");
 
         if(timer <= 90)
         {
             timer += effectiveness;
+            if(effectiveness < 1)
+            {
+                timeUnsucCompres += 1;
+            }
+            if(effectiveness > 1)
+            {
+                timeSucCompres += 1;
+            }
         }
+
+        StopAllCoroutines();
         StartCoroutine(checkEffective());
-    }
-
-    // Function that should run when the patient is on the stretcher
-    void OnStretcher()
-    {
-
     }
 
     IEnumerator checkEffective()
@@ -89,5 +106,6 @@ public class PatientScript : MonoBehaviour
         yield return new WaitForSeconds(timeBetween);
         effectiveness = 10;
         yield return new WaitForSeconds(timeBetween);
+        effectiveness = 5;
     }
 }
