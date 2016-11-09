@@ -4,6 +4,8 @@ using System.Collections;
 public class PatientScript : MonoBehaviour
 {
     public GameObject progressBar;
+    public GameObject EffectText;
+
     public bool isOnStretcher;
 
     private float timer;
@@ -12,42 +14,57 @@ public class PatientScript : MonoBehaviour
 
     private bool increase = true;
     private bool decrease = false;
-    
+    private bool inCondition;
+
     // Use this for initialization
     void Start ()
     {
-        timer = 100.0f;
+        inCondition = true;
+        timer = 50.0f;
         isOnStretcher = false;
+        effectiveness = 5;
 	}
 
     void Update()
     {
-        if(timer > 0.05f)
+        if(inCondition)
         {
-            timer -= Time.deltaTime;
+            if (timer > 0.05f)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                timer = 0.0f;
+            }
+            if (isOnStretcher)
+            {
+                progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+            }
+
+            if (Input.GetButtonUp("Jump"))
+            {
+                increaseForPush();
+            }
+            EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
         }
-        else
+
+        if(timer >= 90)
         {
-            timer = 0.0f;
-        }
-        if(isOnStretcher)
-        {
-            progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
-        }
-        
-        if(Input.GetButtonUp("Jump"))
-        {
-            increaseForPush();
+            inCondition = false;
+            progressBar.transform.localScale = new Vector3(0.9f, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+            EffectText.GetComponent<TextMesh>().text = "Patient no longer needs CPR";
         }
     }
 
     public void increaseForPush()
     {
         Debug.Log("You increased for push ");
-        if(timer <= 10)
+        if(timer <= 90)
         {
             timer += effectiveness;
         }
+        StartCoroutine(checkEffective());
     }
 
     // Function that should run when the patient is on the stretcher
@@ -56,30 +73,16 @@ public class PatientScript : MonoBehaviour
 
     }
 
-    IEnumerator checkEffectiveness()
+    IEnumerator checkEffective()
     {
-        if (increase)
-        {
-            effectiveness += 1;
-            if(effectiveness >= 10)
-            {
-                increase = false;
-                decrease = true;
-            }
-        }
+        effectiveness = -5;
 
-        if (decrease)
-        {
-            effectiveness -= 1;
-            if (effectiveness <= -4)
-            {
-                increase = true;
-                decrease = false;
-            }
-        }
+        yield return new WaitForSeconds(1.0f );
 
-        yield return new WaitForSeconds(1/15);
-        Debug.Log("effectiveness = "+ effectiveness);
-        
+        effectiveness = 0;
+
+        yield return new WaitForSeconds(1.0f);
+
+        effectiveness = 50;
     }
 }
