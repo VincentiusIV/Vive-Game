@@ -12,8 +12,6 @@ public class PatientScript : MonoBehaviour
 
     private int effectiveness;
 
-    private bool increase = true;
-    private bool decrease = false;
     private bool inCondition;
 
     // Use this for initialization

@@ -7,12 +7,6 @@ public class CompareTags : MonoBehaviour
     * with a SnapPosition and the Trigger button on the vive controller
     * is released
     */
-    
-    // Bool that lets the InputScript know if this object collided with SnapPosition
-    public bool isColSnap;
-    
-    // Bool that is set in the InputScript when the trigger button is released
-    public bool canSnap;
 
     // List of bools for special SnapPositions
     public bool isStretcher;
@@ -20,7 +14,7 @@ public class CompareTags : MonoBehaviour
     void OnTriggerStay(Collider col)
     {
         PreSnapping(col);
-
+        
         if(isStretcher && col.CompareTag("Patient"))
         {
             col.GetComponent<PatientScript>().isOnStretcher = true;
@@ -29,17 +23,19 @@ public class CompareTags : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        isColSnap = false;
+        col.GetComponent<SnapScript>()._isColSnap = false;
+
         this.GetComponent<MeshRenderer>().enabled = false;
     }
     
     void PreSnapping(Collider _col)
     {
-        isColSnap = true;
+        //isColSnap = true;
+        _col.GetComponent<SnapScript>()._isColSnap = true;
 
         this.GetComponent<MeshRenderer>().enabled = true;
 
-        if (canSnap)
+        if (_col.GetComponent<SnapScript>()._canSnap)
         {
             SnapToPosition(_col);
             this.GetComponent<MeshRenderer>().enabled = false;
