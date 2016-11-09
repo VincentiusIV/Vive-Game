@@ -5,17 +5,17 @@ public class CompareTags : MonoBehaviour
 {
     /* Script that allows an object to snap into place when it collides
     * with a SnapPosition and the Trigger button on the vive controller
-    * is released
+    * is released (patient only). Unfortunately a link must be made with the PatientScript
+    * to make this happen for the patient.
     */
 
     // List of bools for special SnapPositions
-    public bool isStretcher;
 
     void OnTriggerStay(Collider col)
     {
         PreSnapping(col);
         
-        if(isStretcher && col.CompareTag("Patient"))
+        if(col.CompareTag("Patient"))
         {
             col.GetComponent<PatientScript>().isOnStretcher = true;
         }
@@ -23,24 +23,31 @@ public class CompareTags : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        col.GetComponent<PatientScript>().isColSnap = false;
+        if (col.CompareTag("Patient"))
+        {
+            col.GetComponent<PatientScript>().isColSnap = false;
+        }
         this.GetComponent<MeshRenderer>().enabled = false;
     }
     
     void PreSnapping(Collider _col)
     {
-        _col.GetComponent<PatientScript>().isColSnap = true;
         this.GetComponent<MeshRenderer>().enabled = true;
 
-        if (_col.GetComponent<PatientScript>().canSnap)
+        if (_col.CompareTag("Patient"))
         {
-            SnapToPosition(_col);
-            this.GetComponent<MeshRenderer>().enabled = false;
+            _col.GetComponent<PatientScript>().isColSnap = true;
+            if (_col.GetComponent<PatientScript>().canSnap)
+            {
+                SnapToPosition(_col);
+            }
         }
+        
     }
     
     private void SnapToPosition(Collider col)
     {
+        this.GetComponent<MeshRenderer>().enabled = false;
         col.transform.position = this.transform.position;
         col.transform.rotation = this.transform.rotation;
         col.transform.SetParent(this.transform.parent);
