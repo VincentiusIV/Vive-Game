@@ -46,11 +46,11 @@ public class InputScript : MonoBehaviour
     {
         if (col.tag == "VrController")
         { return; }
-        /*else if(col.CompareTag("InteractableArea"))
+        else if(col.CompareTag("InteractableArea"))
         {
             col.transform.position = new Vector3(col.transform.position.x, col.transform.position.y, this.transform.position.z);
             Debug.Log("collider tag is " + col.tag);
-        }*/
+        }
         else if(col.tag != "InteractableArea")
         {
             // runs when trigger is held down
