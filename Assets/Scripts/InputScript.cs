@@ -48,7 +48,7 @@ public class InputScript : MonoBehaviour
         { return; }
         else if(col.CompareTag("InteractableArea"))
         {
-            col.transform.position = new Vector3(col.transform.position.x, col.transform.position.y, this.transform.position.z);
+            col.transform.position = new Vector3(col.transform.position.x, this.transform.position.y, col.transform.position.z);
             Debug.Log("collider tag is " + col.tag);
         }
         else if(col.tag != "InteractableArea")
