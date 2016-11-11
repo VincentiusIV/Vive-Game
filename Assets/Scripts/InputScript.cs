@@ -48,32 +48,25 @@ public class InputScript : MonoBehaviour
         { return; }
         else if(col.CompareTag("InteractableArea"))
         {
+            col.transform.position = new Vector3(col.transform.position.x, col.transform.position.y, this.transform.position.z);
             Debug.Log("collider tag is " + col.tag);
-            if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+            /*if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
             {
                 Debug.Log("Grip is held down");
-                col.transform.position = new Vector3(col.transform.position.x, col.transform.position.y, this.transform.position.z );
+                
             }
             if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
             {
-
-            }
+                
+            }*/
         }
-        else
+        else if(col.tag != "InteractableArea")
         {
             // runs when trigger is held down
             if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
             {
                 col.attachedRigidbody.isKinematic = true;
                 col.gameObject.transform.SetParent(this.gameObject.transform);
-
-                /* This is for objects that have already been snapped into place by the player
-                 * canSnap is reset so the player can pick up the object that has been snapped before
-                 */
-                if (col.gameObject.GetComponent<PatientScript>().isColSnap == true && col.tag != "Patient")
-                {
-                    col.gameObject.GetComponent<PatientScript>().canSnap = false;
-                }
             }
 
             // runs when trigger is released
@@ -86,18 +79,7 @@ public class InputScript : MonoBehaviour
                 {
                     tossObject(col.attachedRigidbody);
                 }
-
-                /* This basically checks if the object the controller is colliding with
-                 * is colliding with a SnapPosition.
-                 * This makes the object able to snap onto the SnapPosition when the trigger is released.
-                 */
-                if (col.gameObject.GetComponent<PatientScript>().isColSnap == true)
-                {
-                    col.gameObject.GetComponent<PatientScript>().canSnap = true;
-                }
             }
-
-            
         }
     }
 

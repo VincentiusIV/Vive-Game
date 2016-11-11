@@ -10,9 +10,6 @@ public class PatientScript : MonoBehaviour
     public Transform pinchArea;
 
     public bool isOnStretcher;
-    public bool isColSnap;
-    public bool canSnap;
-    public bool isPatient;
 
     private float timer;
     private int timeCompres;
@@ -21,9 +18,9 @@ public class PatientScript : MonoBehaviour
 
     private int effectiveness;
     private bool inCondition;
-    private bool chestCompressed;
+    private bool pushed;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         inCondition = true;
         timer = 50.0f;
@@ -49,19 +46,14 @@ public class PatientScript : MonoBehaviour
                 progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
             }
 
-            if (Input.GetButtonDown("Jump") || pushArea.transform.position.z < 0.15f)
+            if (pushArea.GetComponent<AddForce>().uncompressed == true && pushed == true)
             {
-                Debug.Log("chest compressed");
-                if(chestCompressed == false)
-                {
-                    increaseForPush();
-                    chestCompressed = true;
-                }
+                pushed = false;
             }
-            if(Input.GetButtonUp("Jump") || pushArea.transform.position.z > 0.2f)
+            if(pushArea.GetComponent<AddForce>().compressed && pushed == false)
             {
-                Debug.Log("PushArea is above 0.2");
-                chestCompressed = false;
+                increaseForPush();
+                pushed = true;
             }
 
             EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
