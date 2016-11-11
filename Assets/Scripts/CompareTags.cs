@@ -9,11 +9,9 @@ public class CompareTags : MonoBehaviour
     * to make this happen for the patient.
     */
 
-    // List of bools for special SnapPositions
-
     void OnTriggerStay(Collider col)
     {
-        PreSnapping(col);
+        PreSnap(col);
         
         if(col.CompareTag("Patient"))
         {
@@ -30,17 +28,23 @@ public class CompareTags : MonoBehaviour
         this.GetComponent<MeshRenderer>().enabled = false;
     }
     
-    void PreSnapping(Collider _col)
+    void PreSnap(Collider _col)
     {
         this.GetComponent<MeshRenderer>().enabled = true;
 
         if (_col.CompareTag("Patient"))
         {
             _col.GetComponent<PatientScript>().isColSnap = true;
+
             if (_col.GetComponent<PatientScript>().canSnap)
             {
+                _col.GetComponent<PatientScript>().canSnap = false;
                 SnapToPosition(_col);
             }
+        }
+        else
+        {
+            SnapToPosition(_col);
         }
         
     }

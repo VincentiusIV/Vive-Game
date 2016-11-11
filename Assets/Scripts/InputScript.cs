@@ -48,8 +48,10 @@ public class InputScript : MonoBehaviour
         { return; }
         else if(col.CompareTag("InteractableArea"))
         {
+            Debug.Log("collider tag is " + col.tag);
             if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
             {
+                Debug.Log("Grip is held down");
                 col.transform.position = new Vector3(col.transform.position.x, col.transform.position.y, this.transform.position.z );
             }
             if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
