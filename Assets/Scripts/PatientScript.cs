@@ -5,6 +5,8 @@ public class PatientScript : MonoBehaviour
 {
     public GameObject progressBar;
     public GameObject EffectText;
+    public GameObject greenLight;
+    public GameObject redLight;
 
     public Transform pushArea;
     public Transform pinchArea;
@@ -45,7 +47,6 @@ public class PatientScript : MonoBehaviour
             {
                 progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
                 GetComponent<Rigidbody>().isKinematic = true;
-                
             }
 
             if (pushArea.GetComponent<AddForce>().uncompressed == true && pushed == true)
