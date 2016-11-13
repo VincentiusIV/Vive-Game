@@ -2,13 +2,14 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public class ButtonFunctionality : MonoBehaviour
 {
     public bool SwitchScene;
     public string sceneName;
+    public bool exitGame;
     /*
-     * Method used for the switching of scenes. OnTriggerEnter is called whenever collision happens
-     * A check is the performed to see if the colliding object is the controller, if true it checks which scene is being tapped and then it's loaded.     * 
+     * Method for button functionality such as Loading a new scene
+     * runs when the button is colliding with the Vive Controller
      */
     void OnTriggerEnter(Collider other)
     {
@@ -17,6 +18,10 @@ public class SceneLoader : MonoBehaviour
             if (SwitchScene)
             {
                 SceneManager.LoadScene(sceneName);
+            }
+            if(exitGame)
+            {
+                Application.Quit();
             }
         }
     }

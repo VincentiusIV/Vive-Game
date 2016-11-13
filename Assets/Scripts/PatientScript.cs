@@ -26,6 +26,9 @@ public class PatientScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        greenLight.SetActive(false);
+        redLight.SetActive(false);
+        
         inCondition = true;
         isOnStretcher = false;
 
