@@ -5,34 +5,47 @@ public class PatientScript : MonoBehaviour
 {
     public GameObject progressBar;
     public GameObject EffectText;
+    public GameObject greenLight;
+    public GameObject redLight;
 
     public Transform pushArea;
     public Transform pinchArea;
 
+    public AudioClip[] audioClips;
+
     public bool isOnStretcher;
-    public bool isColSnap;
-    public bool canSnap;
-    public bool isPatient;
 
     private float timer;
     private int timeCompres;
     private int timeSucCompres;
     private int timeUnsucCompres;
 
+    private IEnumerator effectCoroutine;
+
     private int effectiveness;
     private bool inCondition;
-    private bool chestCompressed;
+    private bool pushed;
+
+    private AudioSource breathingSound;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
+        greenLight.SetActive(false);
+        redLight.SetActive(false);
+        
         inCondition = true;
-        timer = 50.0f;
         isOnStretcher = false;
+
+        timer = 50.0f;
+        effectCoroutine = checkEffective();
         effectiveness = 5;
+
+        breathingSound = GetComponent<AudioSource>();
 	}
 
     void Update()
     {
+        Debug.Log(effectiveness);
         if (timer > 0.05f)
         {
             timer -= Time.deltaTime;
@@ -44,24 +57,26 @@ public class PatientScript : MonoBehaviour
 
         if (inCondition)
         {
+            
             if (isOnStretcher)
             {
                 progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+                GetComponent<Rigidbody>().isKinematic = true;
             }
 
-            if (Input.GetButtonDown("Jump") || pushArea.transform.position.z < 0.15f)
+            if (pushArea.GetComponent<AddForce>().uncompressed == true && pushed == true)
             {
-                Debug.Log("chest compressed");
-                if(chestCompressed == false)
-                {
-                    increaseForPush();
-                    chestCompressed = true;
-                }
+                breathingSound.clip = audioClips[1];
+                breathingSound.Play();
+                pushed = false;
             }
-            if(Input.GetButtonUp("Jump") || pushArea.transform.position.z > 0.2f)
+            if(pushArea.GetComponent<AddForce>().compressed && pushed == false)
             {
-                Debug.Log("PushArea is above 0.2");
-                chestCompressed = false;
+                breathingSound.clip = audioClips[0];
+                breathingSound.Play();
+
+                increaseForPush();
+                pushed = true;
             }
 
             EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
@@ -69,32 +84,37 @@ public class PatientScript : MonoBehaviour
 
         if(timer >= 90)
         {
-            inCondition = false;
-            progressBar.transform.localScale = new Vector3(0.9f, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
-            EffectText.GetComponent<TextMesh>().text = "Patient no longer needs CPR";
+            PatientIsHealthy();
         }
     }
 
     public void increaseForPush()
     {
         timeCompres += 1;
-        Debug.Log("You increased for push for the "+timeCompres+"th time");
+        //Debug.Log("You increased for push for the "+timeCompres+"th time");
 
         if(timer <= 90)
         {
             timer += effectiveness;
-            if(effectiveness < 1)
+
+            if(effectiveness < 6)
             {
+                Debug.Log("push unsuccesful");
                 timeUnsucCompres += 1;
+                redLight.SetActive(true);
+                StartCoroutine(OffAfterSeconds(0.5f, redLight));
             }
-            if(effectiveness > 1)
+            if(effectiveness > 5)
             {
+                Debug.Log("push succesful");
                 timeSucCompres += 1;
+                greenLight.SetActive(true);
+                StartCoroutine(OffAfterSeconds(0.5f, greenLight));
             }
         }
 
-        StopAllCoroutines();
-        StartCoroutine(checkEffective());
+        StopCoroutine(effectCoroutine);
+        StartCoroutine(effectCoroutine);
     }
 
     IEnumerator checkEffective()
@@ -107,5 +127,21 @@ public class PatientScript : MonoBehaviour
         effectiveness = 10;
         yield return new WaitForSeconds(timeBetween);
         effectiveness = 5;
+    }
+
+    IEnumerator OffAfterSeconds(float sec, GameObject _light)
+    {
+        yield return new WaitForSeconds(sec);
+        _light.SetActive(false);
+    }
+
+    void PatientIsHealthy()
+    {
+        inCondition = false;
+        progressBar.transform.localScale = new Vector3(0.9f, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+        EffectText.GetComponent<TextMesh>().text = "Patient alive";
+        breathingSound.clip = audioClips[2];
+        breathingSound.Play();
+        breathingSound.loop = true;
     }
 }
