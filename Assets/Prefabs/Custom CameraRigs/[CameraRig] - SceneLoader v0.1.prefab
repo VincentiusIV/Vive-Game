@@ -368,7 +368,7 @@ GameObject:
   - 33: {fileID: 33000012110295992}
   - 114: {fileID: 114000013764510158}
   m_Layer: 0
-  m_Name: '[CameraRig] - SceneLoader'
+  m_Name: '[CameraRig] - SceneLoader v0.1'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2209,8 +2209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2226e37d2c21248824b1a5ffe8cdc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonHolder: {fileID: 0}
-  ButtonEnabled: 0
 --- !u!114 &114000012994390132
 MonoBehaviour:
   m_ObjectHideFlags: 1
