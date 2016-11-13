@@ -11,6 +11,8 @@ public class PatientScript : MonoBehaviour
     public Transform pushArea;
     public Transform pinchArea;
 
+    public AudioClip[] audioClips;
+
     public bool isOnStretcher;
 
     private float timer;
@@ -23,6 +25,8 @@ public class PatientScript : MonoBehaviour
     private int effectiveness;
     private bool inCondition;
     private bool pushed;
+
+    private AudioSource breathingSound;
     // Use this for initialization
     void Start()
     {
@@ -35,10 +39,13 @@ public class PatientScript : MonoBehaviour
         timer = 50.0f;
         effectCoroutine = checkEffective();
         effectiveness = 5;
+
+        breathingSound = GetComponent<AudioSource>();
 	}
 
     void Update()
     {
+        Debug.Log(effectiveness);
         if (timer > 0.05f)
         {
             timer -= Time.deltaTime;
@@ -59,10 +66,15 @@ public class PatientScript : MonoBehaviour
 
             if (pushArea.GetComponent<AddForce>().uncompressed == true && pushed == true)
             {
+                breathingSound.clip = audioClips[1];
+                breathingSound.Play();
                 pushed = false;
             }
             if(pushArea.GetComponent<AddForce>().compressed && pushed == false)
             {
+                breathingSound.clip = audioClips[0];
+                breathingSound.Play();
+
                 increaseForPush();
                 pushed = true;
             }
@@ -72,9 +84,7 @@ public class PatientScript : MonoBehaviour
 
         if(timer >= 90)
         {
-            inCondition = false;
-            progressBar.transform.localScale = new Vector3(0.9f, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
-            EffectText.GetComponent<TextMesh>().text = "Patient no longer needs CPR";
+            PatientIsHealthy();
         }
     }
 
@@ -123,5 +133,15 @@ public class PatientScript : MonoBehaviour
     {
         yield return new WaitForSeconds(sec);
         _light.SetActive(false);
+    }
+
+    void PatientIsHealthy()
+    {
+        inCondition = false;
+        progressBar.transform.localScale = new Vector3(0.9f, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+        EffectText.GetComponent<TextMesh>().text = "Patient alive";
+        breathingSound.clip = audioClips[2];
+        breathingSound.Play();
+        breathingSound.loop = true;
     }
 }
