@@ -18,6 +18,8 @@ public class PatientScript : MonoBehaviour
     private int timeSucCompres;
     private int timeUnsucCompres;
 
+    private IEnumerator effectCoroutine;
+
     private int effectiveness;
     private bool inCondition;
     private bool pushed;
@@ -25,8 +27,10 @@ public class PatientScript : MonoBehaviour
     void Start()
     {
         inCondition = true;
-        timer = 50.0f;
         isOnStretcher = false;
+
+        timer = 50.0f;
+        effectCoroutine = checkEffective();
         effectiveness = 5;
 	}
 
@@ -43,6 +47,7 @@ public class PatientScript : MonoBehaviour
 
         if (inCondition)
         {
+            
             if (isOnStretcher)
             {
                 progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
@@ -73,23 +78,30 @@ public class PatientScript : MonoBehaviour
     public void increaseForPush()
     {
         timeCompres += 1;
-        Debug.Log("You increased for push for the "+timeCompres+"th time");
+        //Debug.Log("You increased for push for the "+timeCompres+"th time");
 
         if(timer <= 90)
         {
             timer += effectiveness;
-            if(effectiveness < 1)
+
+            if(effectiveness < 6)
             {
+                Debug.Log("push unsuccesful");
                 timeUnsucCompres += 1;
+                redLight.SetActive(true);
+                StartCoroutine(OffAfterSeconds(0.5f, redLight));
             }
-            if(effectiveness > 1)
+            if(effectiveness > 5)
             {
+                Debug.Log("push succesful");
                 timeSucCompres += 1;
+                greenLight.SetActive(true);
+                StartCoroutine(OffAfterSeconds(0.5f, greenLight));
             }
         }
 
-        StopAllCoroutines();
-        StartCoroutine(checkEffective());
+        StopCoroutine(effectCoroutine);
+        StartCoroutine(effectCoroutine);
     }
 
     IEnumerator checkEffective()
@@ -102,5 +114,11 @@ public class PatientScript : MonoBehaviour
         effectiveness = 10;
         yield return new WaitForSeconds(timeBetween);
         effectiveness = 5;
+    }
+
+    IEnumerator OffAfterSeconds(float sec, GameObject _light)
+    {
+        yield return new WaitForSeconds(sec);
+        _light.SetActive(false);
     }
 }

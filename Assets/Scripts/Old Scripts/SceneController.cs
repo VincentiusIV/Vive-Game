@@ -3,7 +3,9 @@ using System.Collections;
 using Valve.VR;
 
 public class SceneController : MonoBehaviour { 
-    SteamVR_TrackedObject obj;
+  /*  this script is old and has some link issues therefor this is commented
+   *  
+   *  SteamVR_TrackedObject obj;
 
     public GameObject ButtonHolder;
     public bool ButtonEnabled;
@@ -17,7 +19,7 @@ public class SceneController : MonoBehaviour {
     /*
      * Handles the visibility of the scene loading cubes. 
      * Opens or closes the loading cubes when the applicationbutton is pressed 
-     */
+     *
 	void Update () {
 
         var device = SteamVR_Controller.Input((int)obj.index);
@@ -32,5 +34,5 @@ public class SceneController : MonoBehaviour {
                 ButtonHolder.SetActive(false);
             }
         }
-	}
+	}*/
 }
