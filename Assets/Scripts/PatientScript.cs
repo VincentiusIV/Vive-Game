@@ -14,6 +14,7 @@ public class PatientScript : MonoBehaviour
     public Transform pinchArea;
 
     public AudioSource heartMonitorSound;
+    public AudioClip deathSound;
 
     public bool isOnStretcher;
 
@@ -81,6 +82,10 @@ public class PatientScript : MonoBehaviour
                 needsRespiration = true;
                 EffectText.GetComponent<TextMesh>().text = "Respire now";
             }
+        }
+        else if(timer <= 0)
+        {
+            PatientIsDead();
         }
         else
         {
@@ -171,5 +176,26 @@ public class PatientScript : MonoBehaviour
         
         IsAliveSound.Play();
         IsAliveSound.loop = true;
+
+        if(heartMonitorSound.isPlaying == false)
+        {
+            heartMonitorSound.loop = true;
+            heartMonitorSound.Play();
+        }
+        
+    }
+
+    void PatientIsDead()
+    {
+        timer = 0;
+        inCondition = false;
+        EffectText.GetComponent<TextMesh>().text = "Patient is dead";
+
+        if(heartMonitorSound.isPlaying == false && heartMonitorSound.clip != deathSound)
+        {
+            heartMonitorSound.clip = deathSound;
+            heartMonitorSound.loop = true;
+            heartMonitorSound.Play();
+        }
     }
 }
