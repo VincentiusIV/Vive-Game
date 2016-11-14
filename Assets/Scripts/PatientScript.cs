@@ -50,8 +50,6 @@ public class PatientScript : MonoBehaviour
 
     void Update()
     {
-        
-        
         if (inCondition)
         {
             if (isOnStretcher)
@@ -63,7 +61,7 @@ public class PatientScript : MonoBehaviour
             {
                 pushed = false;
             }
-            if(pushArea.GetComponent<AddForce>().compressed && pushed == false)
+            if (pushArea.GetComponent<AddForce>().compressed && pushed == false)
             {
                 increaseForPush();
                 pushed = true;
@@ -79,7 +77,7 @@ public class PatientScript : MonoBehaviour
             if (chance == 4)
             {
                 needsRespiration = true;
-                EffectText.GetComponent<TextMesh>().text = "RESPIRATE THAT SOAB";
+                EffectText.GetComponent<TextMesh>().text = "Respire now";
             }
         }
         else
@@ -104,14 +102,14 @@ public class PatientScript : MonoBehaviour
         {
             timer += effectiveness;
 
-            if(effectiveness < 6)
+            if(effectiveness < 1)
             {
                 Debug.Log("push unsuccesful");
                 timeUnsucCompres += 1;
                 redLight.SetActive(true);
                 StartCoroutine(OffAfterSeconds(0.5f, redLight));
             }
-            if(effectiveness > 5)
+            if(effectiveness > 1)
             {
                 Debug.Log("push succesful");
                 timeSucCompres += 1;
@@ -119,7 +117,6 @@ public class PatientScript : MonoBehaviour
                 StartCoroutine(OffAfterSeconds(0.5f, greenLight));
             }
         }
-
         StopCoroutine(effectCoroutine);
         StartCoroutine(effectCoroutine);
     }
@@ -127,22 +124,22 @@ public class PatientScript : MonoBehaviour
     {
         if(needsRespiration && isNosePinched)
         {
-            if (respirationStatus >= 0.9)
+            if (respirationStatus >= 9)
             {
-                respirationStatus = 0.9f;
+                
+                respirationStatus = 9.0f;
                 PatientIsHealthy();
             }
             else
             {
                 respirationStatus += Time.deltaTime;
             }
-            respirationBar.transform.localScale = new Vector3(respirationStatus, respirationBar.transform.localScale.y, respirationBar.transform.localScale.z);
+            respirationBar.transform.localScale = new Vector3(respirationStatus /10, respirationBar.transform.localScale.y, respirationBar.transform.localScale.z);
         }
     }
 
     public void pinchNose(bool value)
     {
-        Debug.Log("you pinched the nose");
         isNosePinched = value;
     }
 

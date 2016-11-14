@@ -9,9 +9,6 @@ public class AddForce : MonoBehaviour {
     public GameObject upTrigger;
     public GameObject downTrigger;
 
-    public AudioClip[] audioClips;
-    public AudioSource breathingSound;
-
     public bool uncompressed;
     public bool compressed;
     
@@ -42,8 +39,6 @@ public class AddForce : MonoBehaviour {
     {
         if(col.name == upTrigger.name)
         {
-            breathingSound.clip = audioClips[0];
-            breathingSound.Play();
             uncompressed = true;
             compressed = false;
         }
@@ -51,15 +46,6 @@ public class AddForce : MonoBehaviour {
         {
             compressed = true;
             uncompressed = false;
-        }
-    }
-
-    void OnTriggerExit(Collider col)
-    {
-        if(col.name == upTrigger.name)
-        {
-            breathingSound.clip = audioClips[1];
-            breathingSound.Play();
         }
     }
 }

@@ -50,7 +50,9 @@ public class InputScript : MonoBehaviour
     void OnTriggerStay(Collider col)
     {
         if (col.tag == "VrController")
-        { return; }
+        {
+            return;
+        }
         else if(col.CompareTag("InteractableArea"))
         {
             if (col.name == "PinchArea")
