@@ -71,6 +71,10 @@ public class InputScript : MonoBehaviour
         }
         else if(col.tag != "InteractableArea" && col.tag != "HMD")
         {
+            if(col.tag == "Patient" && col.GetComponent<PatientScript>().isOnStretcher == true)
+            {
+                return;
+            }
             // runs when trigger is held down
             if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
             {
@@ -115,7 +119,3 @@ public class InputScript : MonoBehaviour
         }
     }
 }
-
- 
-    
-
