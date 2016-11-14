@@ -48,7 +48,7 @@ public class PatientScript : MonoBehaviour
 
     void Update()
     {
-        respirationBar.transform.localScale = new Vector3(respirationStatus, respirationBar.transform.localScale.y, respirationBar.transform.localScale.z);
+        
 
         if (timer > 0.05f)
         {
@@ -123,8 +123,15 @@ public class PatientScript : MonoBehaviour
     public void respiration()
     {
         Debug.Log("You kissed me god damnit");
-        respirationStatus += Time.deltaTime;
-        
+        if (respirationStatus >= 0.9)
+        {
+            respirationStatus = 0.9f;
+        }
+        else
+        {
+            respirationStatus += Time.deltaTime;
+        }
+        respirationBar.transform.localScale = new Vector3(respirationStatus, respirationBar.transform.localScale.y, respirationBar.transform.localScale.z);
     }
     IEnumerator checkEffective()
     {
