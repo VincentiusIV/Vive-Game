@@ -18,9 +18,6 @@ public class ButtonFunctionality : MonoBehaviour
      */
     void OnCollisionEnter(Collision other)
     {
-        //other.collider.CompareTag("VrController")
-        if (true)
-        {
             if (switchScene)
             {
                 Debug.Log("switched scene");
@@ -35,7 +32,6 @@ public class ButtonFunctionality : MonoBehaviour
             {
                 StartCoroutine(move(false));
             }
-        }
     }
     /*void OnMouseEnter()
     {
