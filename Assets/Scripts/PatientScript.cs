@@ -28,6 +28,7 @@ public class PatientScript : MonoBehaviour
     private bool inCondition;
     private bool pushed;
     private bool needsRespiration;
+    private bool isNosePinched;
     private AudioSource IsAliveSound;
 
     // Use this for initialization
@@ -122,7 +123,7 @@ public class PatientScript : MonoBehaviour
     }
     public void respiration()
     {
-        if(needsRespiration)
+        if(needsRespiration && isNosePinched)
         {
             if (respirationStatus >= 0.9)
             {
@@ -137,9 +138,10 @@ public class PatientScript : MonoBehaviour
         }
     }
 
-    public void pinchNose()
+    public void pinchNose(bool value)
     {
         Debug.Log("you pinched the nose");
+        isNosePinched = value;
     }
 
     IEnumerator checkEffective()

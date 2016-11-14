@@ -48,9 +48,16 @@ public class InputScript : MonoBehaviour
         { return; }
         else if(col.CompareTag("InteractableArea"))
         {
-            if(col.name == "PinchArea")
+            if (col.name == "PinchArea")
             {
-                col.transform.parent.GetComponent<PatientScript>().pinchNose();
+                if (device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+                {
+                    col.transform.parent.GetComponent<PatientScript>().pinchNose(true);
+                }
+                if (device.GetPressUp(SteamVR_Controller.ButtonMask.Grip))
+                {
+                    col.transform.parent.GetComponent<PatientScript>().pinchNose(false);
+                }
             }
             else
             {
