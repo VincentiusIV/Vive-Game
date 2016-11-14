@@ -11,8 +11,6 @@ public class PatientScript : MonoBehaviour
     public Transform pushArea;
     public Transform pinchArea;
 
-    public AudioClip[] audioClips;
-
     public bool isOnStretcher;
 
     private float timer;
@@ -23,10 +21,13 @@ public class PatientScript : MonoBehaviour
     private IEnumerator effectCoroutine;
 
     private int effectiveness;
+    private int chance;
+    private int chanceInrease;
     private bool inCondition;
     private bool pushed;
 
-    private AudioSource breathingSound;
+    private AudioSource IsAliveSound;
+
     // Use this for initialization
     void Start()
     {
@@ -40,12 +41,11 @@ public class PatientScript : MonoBehaviour
         effectCoroutine = checkEffective();
         effectiveness = 5;
 
-        breathingSound = GetComponent<AudioSource>();
+        IsAliveSound = GetComponent<AudioSource>();
 	}
 
     void Update()
     {
-        Debug.Log(effectiveness);
         if (timer > 0.05f)
         {
             timer -= Time.deltaTime;
@@ -57,24 +57,18 @@ public class PatientScript : MonoBehaviour
 
         if (inCondition)
         {
-            
             if (isOnStretcher)
             {
                 progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
                 GetComponent<Rigidbody>().isKinematic = true;
             }
-
+        
             if (pushArea.GetComponent<AddForce>().uncompressed == true && pushed == true)
             {
-                breathingSound.clip = audioClips[1];
-                breathingSound.Play();
                 pushed = false;
             }
             if(pushArea.GetComponent<AddForce>().compressed && pushed == false)
             {
-                breathingSound.clip = audioClips[0];
-                breathingSound.Play();
-
                 increaseForPush();
                 pushed = true;
             }
@@ -84,14 +78,20 @@ public class PatientScript : MonoBehaviour
 
         if(timer >= 90)
         {
-            PatientIsHealthy();
+            timer = 90;
+            chance = Random.Range(chanceInrease, 5);
+            chanceInrease++;
+
+            if (chance == 3)
+            {
+                PatientIsHealthy();
+            }
         }
     }
 
     public void increaseForPush()
     {
         timeCompres += 1;
-        //Debug.Log("You increased for push for the "+timeCompres+"th time");
 
         if(timer <= 90)
         {
@@ -138,10 +138,10 @@ public class PatientScript : MonoBehaviour
     void PatientIsHealthy()
     {
         inCondition = false;
-        progressBar.transform.localScale = new Vector3(0.9f, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+        timer = 90;
         EffectText.GetComponent<TextMesh>().text = "Patient alive";
-        breathingSound.clip = audioClips[2];
-        breathingSound.Play();
-        breathingSound.loop = true;
+        
+        IsAliveSound.Play();
+        IsAliveSound.loop = true;
     }
 }
