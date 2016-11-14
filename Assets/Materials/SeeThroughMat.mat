@@ -70,6 +70,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Ramp
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
         name: _BumpScale
@@ -105,6 +111,12 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
+        name: _RimMax
+      second: 1
+    - first:
+        name: _RimMin
+      second: 0.5
+    - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
@@ -122,7 +134,16 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 1, g: 0, b: 0.93103456, a: 0.39215687}
+      second: {r: 1, g: 0, b: 0.93103456, a: 0.134}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _HColor
+      second: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+    - first:
+        name: _RimColor
+      second: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
+    - first:
+        name: _SColor
+      second: {r: 0.29999998, g: 0.29999998, b: 0.29999998, a: 1}
