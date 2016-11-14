@@ -20,6 +20,7 @@ public class CompareTags : MonoBehaviour
         
         if(isRespirationArea)
         {
+            Debug.Log("called patient function");
             transform.parent.GetComponent<PatientScript>().respiration();
         }
         if(snapableObject == col.tag && canSnap)
