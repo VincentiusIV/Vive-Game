@@ -25,14 +25,14 @@ public class EndlessRoad : MonoBehaviour
     {
         if (repeatSpawning)
         {
-            if (transform.position.z < 20 && spawnedNew != true)
+            if (transform.position.z > -20 && spawnedNew != true)
             {
-                Instantiate(roads[Random.Range(0, roads.Length - 1)], new Vector3(0, 0, 79), Quaternion.identity);
+                Instantiate(roads[Random.Range(0, roads.Length - 1)], new Vector3(0, 0, -79), Quaternion.identity);
                 spawnedNew = true;
             }
         }
 
-        if (transform.position.z < destroyDistance)
+        if (transform.position.z > destroyDistance)
         {
             Destroy(this.gameObject);
 
