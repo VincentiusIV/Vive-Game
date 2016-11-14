@@ -89,7 +89,7 @@ public class InputScript : MonoBehaviour
             {
                 col.gameObject.transform.SetParent(null);
                 col.attachedRigidbody.isKinematic = false;
-
+                Debug.Log("parents were" + col.gameObject.transform.parent.name);
                 if (col.attachedRigidbody != null)
                 {
                     tossObject(col.attachedRigidbody);
