@@ -27,7 +27,7 @@ public class PatientScript : MonoBehaviour
     private int chanceInrease;
     private bool inCondition;
     private bool pushed;
-
+    private bool needsRespiration;
     private AudioSource IsAliveSound;
 
     // Use this for initialization
@@ -38,6 +38,7 @@ public class PatientScript : MonoBehaviour
         
         inCondition = true;
         isOnStretcher = false;
+        needsRespiration = false;
 
         timer = 50.0f;
         effectCoroutine = checkEffective();
@@ -48,8 +49,6 @@ public class PatientScript : MonoBehaviour
 
     void Update()
     {
-        
-
         if (timer > 0.05f)
         {
             timer -= Time.deltaTime;
@@ -66,7 +65,6 @@ public class PatientScript : MonoBehaviour
                 progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
                 GetComponent<Rigidbody>().isKinematic = true;
             }
-        
             if (pushArea.GetComponent<AddForce>().uncompressed == true && pushed == true)
             {
                 pushed = false;
@@ -76,7 +74,6 @@ public class PatientScript : MonoBehaviour
                 increaseForPush();
                 pushed = true;
             }
-
             EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
         }
 
@@ -88,7 +85,9 @@ public class PatientScript : MonoBehaviour
 
             if (chance == 3)
             {
-                PatientIsHealthy();
+                needsRespiration = true;
+                EffectText.GetComponent<TextMesh>().text = "RESPIRATE THAT SOAB";
+                //PatientIsHealthy();
             }
         }
     }
@@ -123,16 +122,22 @@ public class PatientScript : MonoBehaviour
     public void respiration()
     {
         Debug.Log("You kissed me god damnit");
-        if (respirationStatus >= 0.9)
+
+        if(needsRespiration)
         {
-            respirationStatus = 0.9f;
+            if (respirationStatus >= 0.9)
+            {
+                respirationStatus = 0.9f;
+                PatientIsHealthy();
+            }
+            else
+            {
+                respirationStatus += Time.deltaTime;
+            }
+            respirationBar.transform.localScale = new Vector3(respirationStatus, respirationBar.transform.localScale.y, respirationBar.transform.localScale.z);
         }
-        else
-        {
-            respirationStatus += Time.deltaTime;
-        }
-        respirationBar.transform.localScale = new Vector3(respirationStatus, respirationBar.transform.localScale.y, respirationBar.transform.localScale.z);
     }
+
     IEnumerator checkEffective()
     {
         float timeBetween = 0.33f;
