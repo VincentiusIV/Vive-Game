@@ -9,6 +9,8 @@ TagManager:
   - SnapPosition
   - Stretcher
   - InteractableArea
+  - Hand
+  - HMD
   layers:
   - Default
   - TransparentFX

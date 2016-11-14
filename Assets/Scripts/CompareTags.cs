@@ -7,6 +7,7 @@ public class CompareTags : MonoBehaviour
     * with a SnapPosition with the right tag
     */
     public string snapableObject;
+    public bool canSnap;
 
     void OnTriggerStay(Collider col)
     {
