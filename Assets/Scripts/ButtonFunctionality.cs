@@ -18,7 +18,8 @@ public class ButtonFunctionality : MonoBehaviour
      */
     void OnCollisionEnter(Collision other)
     {
-        if (other.collider.CompareTag("VrController"))
+        //other.collider.CompareTag("VrController")
+        if (true)
         {
             if (switchScene)
             {
