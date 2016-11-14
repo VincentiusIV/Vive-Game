@@ -116,7 +116,10 @@ public class PatientScript : MonoBehaviour
         StopCoroutine(effectCoroutine);
         StartCoroutine(effectCoroutine);
     }
-
+    public void respiration()
+    {
+        Debug.Log("You kissed me god damnit");
+    }
     IEnumerator checkEffective()
     {
         float timeBetween = 0.33f;

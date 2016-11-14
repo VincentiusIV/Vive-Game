@@ -8,12 +8,21 @@ public class CompareTags : MonoBehaviour
     */
     public string snapableObject;
     public bool canSnap;
+    public bool isRespirationArea;
 
+    void Awake()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+    }
     void OnTriggerStay(Collider col)
     {
-        this.GetComponent<MeshRenderer>().enabled = true;
+        GetComponent<MeshRenderer>().enabled = true;
         
-        if(snapableObject == col.tag)
+        if(isRespirationArea)
+        {
+            transform.parent.GetComponent<PatientScript>().respiration();
+        }
+        if(snapableObject == col.tag && canSnap)
         {
             SnapToPosition(col);
         }
@@ -21,12 +30,12 @@ public class CompareTags : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        this.GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = false;
     }
     
     private void SnapToPosition(Collider col)
     {
-        this.GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = false;
         col.transform.position = this.transform.position;
         col.transform.rotation = this.transform.rotation;
         col.transform.SetParent(this.transform.parent);
@@ -34,7 +43,7 @@ public class CompareTags : MonoBehaviour
         if (col.CompareTag("Patient"))
         {
             col.GetComponent<PatientScript>().isOnStretcher = true;
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

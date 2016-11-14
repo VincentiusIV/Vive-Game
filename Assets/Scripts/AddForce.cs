@@ -19,8 +19,7 @@ public class AddForce : MonoBehaviour {
 	void Awake ()
     {
         rb = GetComponent<Rigidbody>();
-        tf = GetComponent<Transform>();
-        
+        tf = GetComponent<Transform>(); 
     }
 	
 	// Update is called once per frame
