@@ -51,7 +51,7 @@ public class InputScript : MonoBehaviour
             col.transform.position = new Vector3(col.transform.position.x, this.transform.position.y, col.transform.position.z);
             Debug.Log("collider tag is " + col.tag);
         }
-        else if(col.tag != "InteractableArea")
+        else if(col.tag != "InteractableArea" && col.tag != "HMD")
         {
             // runs when trigger is held down
             if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
