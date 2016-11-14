@@ -23,10 +23,12 @@ public class ButtonFunctionality : MonoBehaviour
         {
             if (switchScene)
             {
+                Debug.Log("switched scene");
                 SceneManager.LoadScene(sceneName);
             }
             if(exitGame)
             {
+                Debug.Log("exitgame");
                 Application.Quit();
             }
             if(showSliders)
@@ -35,9 +37,8 @@ public class ButtonFunctionality : MonoBehaviour
             }
         }
     }
-    void OnMouseEnter()
+    /*void OnMouseEnter()
     {
-        Debug.Log("mouse is over");
         if (showSliders)
         {
             if(transform.parent.transform.position.y >= upDistance)
@@ -50,7 +51,7 @@ public class ButtonFunctionality : MonoBehaviour
             }
             
         }
-    }
+    }*/
 
     IEnumerator move(bool down)
     {
