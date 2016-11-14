@@ -16,16 +16,19 @@ public class ButtonFunctionality : MonoBehaviour
      * Method for button functionality such as Loading a new scene
      * runs when the button is colliding with the Vive Controller
      */
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("VrController"))
+        //other.collider.CompareTag("VrController")
+        if (true)
         {
             if (switchScene)
             {
+                Debug.Log("switched scene");
                 SceneManager.LoadScene(sceneName);
             }
             if(exitGame)
             {
+                Debug.Log("exitgame");
                 Application.Quit();
             }
             if(showSliders)
@@ -34,9 +37,8 @@ public class ButtonFunctionality : MonoBehaviour
             }
         }
     }
-    void OnMouseEnter()
+    /*void OnMouseEnter()
     {
-        Debug.Log("mouse is over");
         if (showSliders)
         {
             if(transform.parent.transform.position.y >= upDistance)
@@ -49,7 +51,7 @@ public class ButtonFunctionality : MonoBehaviour
             }
             
         }
-    }
+    }*/
 
     IEnumerator move(bool down)
     {

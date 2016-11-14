@@ -885,7 +885,7 @@ MonoBehaviour:
   roads:
   - {fileID: 1000012065361520}
   repeatSpawning: 1
-  destroyDistance: -60
+  destroyDistance: -200
 --- !u!114 &114000013230605312
 MonoBehaviour:
   m_ObjectHideFlags: 1
