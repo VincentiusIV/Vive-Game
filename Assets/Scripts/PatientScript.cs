@@ -4,6 +4,8 @@ using System.Collections;
 public class PatientScript : MonoBehaviour
 {
     public GameObject progressBar;
+    public GameObject respirationBar;
+
     public GameObject EffectText;
     public GameObject greenLight;
     public GameObject redLight;
@@ -17,7 +19,7 @@ public class PatientScript : MonoBehaviour
     private int timeCompres;
     private int timeSucCompres;
     private int timeUnsucCompres;
-
+    private float respirationStatus;
     private IEnumerator effectCoroutine;
 
     private int effectiveness;
@@ -119,6 +121,8 @@ public class PatientScript : MonoBehaviour
     public void respiration()
     {
         Debug.Log("You kissed me god damnit");
+        respirationStatus += Time.deltaTime;
+        respirationBar.transform.localScale = new Vector3(respirationStatus, respirationBar.transform.localScale.y, respirationBar.transform.localScale.z);
     }
     IEnumerator checkEffective()
     {
