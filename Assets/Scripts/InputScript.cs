@@ -78,7 +78,7 @@ public class InputScript : MonoBehaviour
                 return;
             }
             // runs when trigger is held down
-            if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
+            if (device.GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
             {
                 //col.attachedRigidbody.isKinematic = true;
                 col.attachedRigidbody.useGravity = false;
