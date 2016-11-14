@@ -13,6 +13,8 @@ public class PatientScript : MonoBehaviour
     public Transform pushArea;
     public Transform pinchArea;
 
+    public AudioSource heartMonitorSound;
+
     public bool isOnStretcher;
 
     private float timer;
@@ -111,6 +113,7 @@ public class PatientScript : MonoBehaviour
             }
             if(effectiveness > 1)
             {
+                heartMonitorSound.Play();
                 Debug.Log("push succesful");
                 timeSucCompres += 1;
                 greenLight.SetActive(true);
@@ -126,7 +129,6 @@ public class PatientScript : MonoBehaviour
         {
             if (respirationStatus >= 9)
             {
-                
                 respirationStatus = 9.0f;
                 PatientIsHealthy();
             }
