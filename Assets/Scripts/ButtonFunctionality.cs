@@ -16,9 +16,9 @@ public class ButtonFunctionality : MonoBehaviour
      * Method for button functionality such as Loading a new scene
      * runs when the button is colliding with the Vive Controller
      */
-    void OnCollisionEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("VrController"))
+        if (other.collider.CompareTag("VrController"))
         {
             if (switchScene)
             {
