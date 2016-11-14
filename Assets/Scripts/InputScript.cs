@@ -48,8 +48,14 @@ public class InputScript : MonoBehaviour
         { return; }
         else if(col.CompareTag("InteractableArea"))
         {
-            col.transform.position = new Vector3(col.transform.position.x, this.transform.position.y, col.transform.position.z);
-            Debug.Log("collider tag is " + col.tag);
+            if(col.name == "PinchArea")
+            {
+                col.transform.parent.GetComponent<PatientScript>().pinchNose();
+            }
+            else
+            {
+                col.transform.position = new Vector3(col.transform.position.x, this.transform.position.y, col.transform.position.z);
+            }
         }
         else if(col.tag != "InteractableArea" && col.tag != "HMD")
         {
