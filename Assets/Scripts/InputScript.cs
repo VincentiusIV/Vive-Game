@@ -71,7 +71,8 @@ public class InputScript : MonoBehaviour
                 col.transform.position = new Vector3(col.transform.position.x, this.transform.position.y, col.transform.position.z);
             }
         }
-        else if(col.tag != "InteractableArea" && col.tag != "HMD")
+
+        if (col.tag != "InteractableArea" && col.tag != "HMD")
         {
             if(col.tag == "Patient" && col.GetComponent<PatientScript>().isOnStretcher == true)
             {
