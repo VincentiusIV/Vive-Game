@@ -50,15 +50,7 @@ public class PatientScript : MonoBehaviour
 
     void Update()
     {
-        EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
-        if (timer > 0.05f)
-        {
-            timer -= Time.deltaTime;
-        }
-        else
-        {
-            timer = 0.0f;
-        }
+        
         
         if (inCondition)
         {
@@ -76,21 +68,31 @@ public class PatientScript : MonoBehaviour
                 increaseForPush();
                 pushed = true;
             }
-            
         }
 
-        if(timer >= 90)
+        if (timer >= 90)
         {
             timer = 90;
             chance = Random.Range(chanceInrease, 5);
             chanceInrease++;
 
-            if (chance == 3)
+            if (chance == 4)
             {
                 needsRespiration = true;
                 EffectText.GetComponent<TextMesh>().text = "RESPIRATE THAT SOAB";
-                //PatientIsHealthy();
             }
+        }
+        else
+        {
+            if (timer > 0.05f)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                timer = 0.0f;
+            }
+            EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
         }
     }
 

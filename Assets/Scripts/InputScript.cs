@@ -40,6 +40,11 @@ public class InputScript : MonoBehaviour
         {
             SetAnimation("Pinch", true, false);
         }
+
+        if(device.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
+        {
+            Debug.Log("you touched the touchpad");
+        }
     }
 
     void OnTriggerStay(Collider col)

@@ -30,7 +30,6 @@ public class AddForce : MonoBehaviour {
         {
             //rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.down * 10.0f, ForceMode.Force);
-            Debug.Log("added force");
         }
         if (Input.GetButtonUp("Jump"))
         {
