@@ -72,7 +72,7 @@ public class InputScript : MonoBehaviour
             }
         }
 
-        if (col.tag != "InteractableArea" && col.tag != "HMD")
+        if (col.tag != "InteractableArea" && col.tag != "HMD" && col.tag != "FixedObject")
         {
             if(col.tag == "Patient" && col.GetComponent<PatientScript>().isOnStretcher == true)
             {

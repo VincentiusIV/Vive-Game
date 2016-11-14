@@ -11,6 +11,7 @@ TagManager:
   - InteractableArea
   - Hand
   - HMD
+  - FixedObject
   layers:
   - Default
   - TransparentFX
