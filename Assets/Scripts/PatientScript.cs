@@ -28,6 +28,7 @@ public class PatientScript : MonoBehaviour
     private bool inCondition;
     private bool pushed;
     private bool needsRespiration;
+    private bool isNosePinched;
     private AudioSource IsAliveSound;
 
     // Use this for initialization
@@ -49,6 +50,7 @@ public class PatientScript : MonoBehaviour
 
     void Update()
     {
+        EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
         if (timer > 0.05f)
         {
             timer -= Time.deltaTime;
@@ -57,7 +59,7 @@ public class PatientScript : MonoBehaviour
         {
             timer = 0.0f;
         }
-
+        
         if (inCondition)
         {
             if (isOnStretcher)
@@ -74,7 +76,7 @@ public class PatientScript : MonoBehaviour
                 increaseForPush();
                 pushed = true;
             }
-            EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
+            
         }
 
         if(timer >= 90)
@@ -121,9 +123,7 @@ public class PatientScript : MonoBehaviour
     }
     public void respiration()
     {
-        Debug.Log("You kissed me god damnit");
-
-        if(needsRespiration)
+        if(needsRespiration && isNosePinched)
         {
             if (respirationStatus >= 0.9)
             {
@@ -136,6 +136,12 @@ public class PatientScript : MonoBehaviour
             }
             respirationBar.transform.localScale = new Vector3(respirationStatus, respirationBar.transform.localScale.y, respirationBar.transform.localScale.z);
         }
+    }
+
+    public void pinchNose(bool value)
+    {
+        Debug.Log("you pinched the nose");
+        isNosePinched = value;
     }
 
     IEnumerator checkEffective()
