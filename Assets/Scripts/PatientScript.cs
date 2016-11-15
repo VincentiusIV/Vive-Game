@@ -18,7 +18,7 @@ public class PatientScript : MonoBehaviour
 
     public bool isOnStretcher;
 
-    private float timer;
+    private float currentHealth;
     private int timeCompres;
     private int timeSucCompres;
     private int timeUnsucCompres;
@@ -46,7 +46,7 @@ public class PatientScript : MonoBehaviour
         isOnStretcher = false;
         needsRespiration = false;
 
-        timer = 50.0f;
+        currentHealth = 50.0f;
         totalHealth = 90f;
         effectCoroutine = checkEffective();
         effectiveness = 5;
@@ -59,9 +59,13 @@ public class PatientScript : MonoBehaviour
     {
         if (inCondition)
         {
+            if(needsRespiration == false)
+            {
+                effectText.GetComponent<TextMesh>().text = "Effectiveness: " + effectiveness;
+            }
             if (isOnStretcher)
             {
-                progressBar.transform.localScale = new Vector3(timer / totalHealth, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+                progressBar.transform.localScale = new Vector3(currentHealth / totalHealth, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
                 GetComponent<Rigidbody>().isKinematic = true;
                 SwitchActive(true);
             }
@@ -78,9 +82,9 @@ public class PatientScript : MonoBehaviour
             }
         }
 
-        if (timer > totalHealth)
+        if (currentHealth > totalHealth)
         {
-            timer = totalHealth;
+            currentHealth = totalHealth;
             chance = Random.Range(chanceInrease, 5);
             chanceInrease++;
 
@@ -90,19 +94,19 @@ public class PatientScript : MonoBehaviour
                 effectText.GetComponent<TextMesh>().text = "Respire now";
             }
         }
-        else if(timer <= 0)
+        else if(currentHealth <= 0)
         {
             PatientIsDead();
         }
         else
         {
-            if (timer > 0.05f)
+            if (currentHealth > 0.05f)
             {
-                timer -= Time.deltaTime;
+                currentHealth -= Time.deltaTime;
             }
             else
             {
-                timer = 0.0f;
+                currentHealth = 0.0f;
             }
             
         }
@@ -117,23 +121,23 @@ public class PatientScript : MonoBehaviour
     {
         if(needsRespiration)
         {
-            timer -= 5;
+            currentHealth -= 5;
         }
         else
         {
             timeCompres += 1;
 
-            if (timer <= 90)
+            if (currentHealth <= 90)
             {
-                timer += effectiveness;
+                currentHealth += effectiveness;
 
-                if (effectiveness < 6)
+                if (effectiveness < 1)
                 {
                     timeUnsucCompres += 1;
                     redLight.SetActive(true);
                     StartCoroutine(OffAfterSeconds(0.5f, redLight));
                 }
-                if (effectiveness == 10)
+                if (effectiveness == 5)
                 {
                     heartMonitorSound.Play();
                     timeSucCompres += 1;
@@ -175,9 +179,9 @@ public class PatientScript : MonoBehaviour
         yield return new WaitForSeconds(timeBetween);
         effectiveness = 0;
         yield return new WaitForSeconds(timeBetween);
-        effectiveness = 10;
-        yield return new WaitForSeconds(timeBetween);
         effectiveness = 5;
+        yield return new WaitForSeconds(timeBetween);
+        effectiveness = 3;
     }
 
     IEnumerator OffAfterSeconds(float sec, GameObject _obj)
@@ -188,7 +192,7 @@ public class PatientScript : MonoBehaviour
 
     IEnumerator HeartRateSound()
     {
-        while(true)
+        for (int i = 0; i < 10; i++)
         {
             heartMonitorSound.Play();
             yield return new WaitForSeconds(1.0f);
@@ -212,7 +216,7 @@ public class PatientScript : MonoBehaviour
     void PatientIsHealthy()
     {
         inCondition = false;
-        timer = 90;
+        currentHealth = 90;
         effectText.GetComponent<TextMesh>().text = "Patient alive";
 
         SwitchAnimation("Breathe", true);
@@ -222,7 +226,7 @@ public class PatientScript : MonoBehaviour
 
     void PatientIsDead()
     {
-        timer = 0;
+        currentHealth = 0;
         inCondition = false;
         effectText.GetComponent<TextMesh>().text = "Patient is dead";
 
