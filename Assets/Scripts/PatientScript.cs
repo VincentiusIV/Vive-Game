@@ -27,6 +27,7 @@ public class PatientScript : MonoBehaviour
     private int effectiveness;
     private int chance;
     private int chanceInrease;
+    private float totalHealth;
 
     private bool inCondition;
     private bool pushed;
@@ -46,6 +47,7 @@ public class PatientScript : MonoBehaviour
         needsRespiration = false;
 
         timer = 50.0f;
+        totalHealth = 90f;
         effectCoroutine = checkEffective();
         effectiveness = 5;
         
@@ -59,7 +61,7 @@ public class PatientScript : MonoBehaviour
         {
             if (isOnStretcher)
             {
-                progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
+                progressBar.transform.localScale = new Vector3(timer / totalHealth, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
                 GetComponent<Rigidbody>().isKinematic = true;
                 SwitchActive(true);
             }
@@ -76,9 +78,9 @@ public class PatientScript : MonoBehaviour
             }
         }
 
-        if (timer > 90)
+        if (timer > totalHealth)
         {
-            timer = 90;
+            timer = totalHealth;
             chance = Random.Range(chanceInrease, 5);
             chanceInrease++;
 
@@ -184,6 +186,15 @@ public class PatientScript : MonoBehaviour
         _obj.SetActive(false);
     }
 
+    IEnumerator HeartRateSound()
+    {
+        while(true)
+        {
+            heartMonitorSound.Play();
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
     void SwitchAnimation(string varName, bool value)
     {
         bodyController.SetBool(varName, value);
@@ -204,16 +215,9 @@ public class PatientScript : MonoBehaviour
         timer = 90;
         effectText.GetComponent<TextMesh>().text = "Patient alive";
 
-        heartMonitorSound.Play();
-        heartMonitorSound.loop = true;
-
         SwitchAnimation("Breathe", true);
 
-        if(heartMonitorSound.isPlaying == false)
-        {
-            heartMonitorSound.loop = true;
-            heartMonitorSound.Play();
-        } 
+        StartCoroutine(HeartRateSound());
     }
 
     void PatientIsDead()

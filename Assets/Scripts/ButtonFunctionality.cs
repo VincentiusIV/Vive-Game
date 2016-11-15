@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonFunctionality : MonoBehaviour
 {
+    
     public float upDistance;
     public int animationSpeed;
 
@@ -12,56 +13,70 @@ public class ButtonFunctionality : MonoBehaviour
     public bool exitGame;
     public bool showSliders;
 
+    private Vector3 pos;
+    private Vector3 startPos;
+    private bool isUp;
+
+    void Awake()
+    {
+        isUp = false;
+    }
+
+    void Update()
+    {
+
+    }
     /*
      * Method for button functionality such as Loading a new scene
      * runs when the button is colliding with the Vive Controller
      */
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
-            if (switchScene)
-            {
-                Debug.Log("switched scene");
-                SceneManager.LoadScene(sceneName);
-            }
-            if(exitGame)
-            {
-                Debug.Log("exitgame");
-                Application.Quit();
-            }
-            if(showSliders)
-            {
-                StartCoroutine(move(false));
-            }
+        Debug.Log("Touched by: " + other.gameObject.name);
+        if (switchScene)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+        if(exitGame)
+        {
+            Application.Quit();
+        }
+        if(showSliders)
+        {
+            StartCoroutine(ScaleAnimation(false));
+        }
     }
-    /*void OnMouseEnter()
+
+    void OnMouseEnter()
     {
+        if (switchScene)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
         if (showSliders)
         {
-            if(transform.parent.transform.position.y >= upDistance)
+            StartCoroutine(ScaleAnimation(false));
+        }
+    }
+
+    IEnumerator ScaleAnimation(bool scaleSetting)
+    {
+        float scaleValue = transform.parent.localScale.x;
+
+        for (int i = 0; i < transform.parent.localScale.x; i = 0)
+        {
+            Debug.Log("setting new scale");
+            if(scaleSetting)
             {
-                StartCoroutine(move(true));
+                scaleValue += (transform.parent.localScale.x / animationSpeed);
             }
-            else if(transform.parent.transform.position.y <= 0)
+            else
             {
-                StartCoroutine(move(false));
+                scaleValue -= (transform.parent.localScale.x / animationSpeed);
             }
             
-        }
-    }*/
-
-    IEnumerator move(bool down)
-    {
-        for (int i = 0; i < animationSpeed; i++)
-        {
-            float yValue = (upDistance / animationSpeed);
-
-            if (down)
-            {
-                yValue *= -1;
-            }
-
-            transform.parent.transform.Translate(new Vector3(0.0f, yValue, 0.0f));
-            yield return new WaitForSeconds(0.0f);
+            transform.parent.transform.localScale = new Vector3(scaleValue, 1f, 1f);
+            yield return new WaitForEndOfFrame();
         }
     }
 }
