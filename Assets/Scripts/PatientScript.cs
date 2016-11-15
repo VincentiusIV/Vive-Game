@@ -150,6 +150,7 @@ public class PatientScript : MonoBehaviour
             StartCoroutine(effectCoroutine);
         }
     }
+
     public void respiration()
     {
         if(needsRespiration && isNosePinched)
@@ -237,6 +238,4 @@ public class PatientScript : MonoBehaviour
             heartMonitorSound.Play();
         }
     }
-
-
 }

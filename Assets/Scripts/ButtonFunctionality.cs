@@ -11,6 +11,8 @@ public class ButtonFunctionality : MonoBehaviour
     public string sceneName;
     public bool exitGame;
 
+    private AudioSource selectSound;
+
     public GameObject highlight;
 
     void Awake()
@@ -19,6 +21,7 @@ public class ButtonFunctionality : MonoBehaviour
         {
             highlight.SetActive(false);
         }
+        selectSound = GetComponent<AudioSource>();
     }
     /*
      * Method for button functionality such as Loading a new scene
@@ -26,6 +29,8 @@ public class ButtonFunctionality : MonoBehaviour
      */
     void OnTriggerEnter(Collider other)
     {
+        selectSound.Play();
+
         if(highlight != null)
         {
             highlight.SetActive(true);
