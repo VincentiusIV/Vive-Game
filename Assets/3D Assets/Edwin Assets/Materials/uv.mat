@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: uv
-  m_Shader: {fileID: 4800000, guid: 4609c28b77ae6c04689a8ba2b2fccba7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 81ae609a37b59f043ac4256abae11b2e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -110,6 +110,12 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
+        name: _RimMax
+      second: 1
+    - first:
+        name: _RimMin
+      second: 0.5
+    - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
@@ -134,6 +140,9 @@ Material:
     - first:
         name: _HColor
       second: {r: 0.50735295, g: 0.50735295, b: 0.50735295, a: 1}
+    - first:
+        name: _RimColor
+      second: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
     - first:
         name: _SColor
       second: {r: 0.19117647, g: 0.19117647, b: 0.19117647, a: 1}

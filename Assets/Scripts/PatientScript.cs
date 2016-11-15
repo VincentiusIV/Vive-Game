@@ -6,7 +6,7 @@ public class PatientScript : MonoBehaviour
     public GameObject progressBar;
     public GameObject respirationBar;
 
-    public GameObject EffectText;
+    public GameObject effectText;
     public GameObject greenLight;
     public GameObject redLight;
 
@@ -34,7 +34,6 @@ public class PatientScript : MonoBehaviour
     private bool isNosePinched;
 
     private Animator bodyController;
-    private AudioSource IsAliveSound;
 
     // Use this for initialization
     void Start()
@@ -49,9 +48,9 @@ public class PatientScript : MonoBehaviour
         timer = 50.0f;
         effectCoroutine = checkEffective();
         effectiveness = 5;
-
-        IsAliveSound = GetComponent<AudioSource>();
+        
         bodyController = GetComponent<Animator>();
+        SwitchActive(false);
 	}
 
     void Update()
@@ -62,6 +61,7 @@ public class PatientScript : MonoBehaviour
             {
                 progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
                 GetComponent<Rigidbody>().isKinematic = true;
+                SwitchActive(true);
             }
             if (pushArea.GetComponent<AddForce>().uncompressed && pushed == true)
             {
@@ -76,7 +76,7 @@ public class PatientScript : MonoBehaviour
             }
         }
 
-        if (timer >= 90)
+        if (timer > 90)
         {
             timer = 90;
             chance = Random.Range(chanceInrease, 5);
@@ -85,7 +85,7 @@ public class PatientScript : MonoBehaviour
             if (chance == 4)
             {
                 needsRespiration = true;
-                EffectText.GetComponent<TextMesh>().text = "Respire now";
+                effectText.GetComponent<TextMesh>().text = "Respire now";
             }
         }
         else if(timer <= 0)
@@ -102,7 +102,12 @@ public class PatientScript : MonoBehaviour
             {
                 timer = 0.0f;
             }
-            EffectText.GetComponent<TextMesh>().text = "Effectiveness = " + effectiveness;
+            
+        }
+
+        if(Input.GetButtonDown("Cancel"))
+        {
+            PatientIsHealthy();
         }
     }
 
@@ -120,23 +125,22 @@ public class PatientScript : MonoBehaviour
             {
                 timer += effectiveness;
 
-                if (effectiveness < 1)
+                if (effectiveness < 6)
                 {
-                    Debug.Log("push unsuccesful");
                     timeUnsucCompres += 1;
                     redLight.SetActive(true);
                     StartCoroutine(OffAfterSeconds(0.5f, redLight));
                 }
-                if (effectiveness > 1)
+                if (effectiveness == 10)
                 {
                     heartMonitorSound.Play();
-                    Debug.Log("push succesful");
                     timeSucCompres += 1;
                     greenLight.SetActive(true);
                     StartCoroutine(OffAfterSeconds(0.5f, greenLight));
                 }
             }
             StopCoroutine(effectCoroutine);
+            effectCoroutine = checkEffective();
             StartCoroutine(effectCoroutine);
         }
     }
@@ -174,10 +178,10 @@ public class PatientScript : MonoBehaviour
         effectiveness = 5;
     }
 
-    IEnumerator OffAfterSeconds(float sec, GameObject _light)
+    IEnumerator OffAfterSeconds(float sec, GameObject _obj)
     {
         yield return new WaitForSeconds(sec);
-        _light.SetActive(false);
+        _obj.SetActive(false);
     }
 
     void SwitchAnimation(string varName, bool value)
@@ -185,14 +189,23 @@ public class PatientScript : MonoBehaviour
         bodyController.SetBool(varName, value);
     }
 
+    void SwitchActive(bool value)
+    {
+        if(pushArea.gameObject.activeInHierarchy != value)
+        {
+            pushArea.gameObject.SetActive(value);
+            pinchArea.gameObject.SetActive(value);
+        }
+    }
+
     void PatientIsHealthy()
     {
         inCondition = false;
         timer = 90;
-        EffectText.GetComponent<TextMesh>().text = "Patient alive";
-        
-        IsAliveSound.Play();
-        IsAliveSound.loop = true;
+        effectText.GetComponent<TextMesh>().text = "Patient alive";
+
+        heartMonitorSound.Play();
+        heartMonitorSound.loop = true;
 
         SwitchAnimation("Breathe", true);
 
@@ -207,7 +220,7 @@ public class PatientScript : MonoBehaviour
     {
         timer = 0;
         inCondition = false;
-        EffectText.GetComponent<TextMesh>().text = "Patient is dead";
+        effectText.GetComponent<TextMesh>().text = "Patient is dead";
 
         if(heartMonitorSound.isPlaying == false && heartMonitorSound.clip != deathSound)
         {
@@ -216,4 +229,6 @@ public class PatientScript : MonoBehaviour
             heartMonitorSound.Play();
         }
     }
+
+
 }
