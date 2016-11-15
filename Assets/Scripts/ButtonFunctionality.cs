@@ -4,21 +4,31 @@ using UnityEngine.SceneManagement;
 
 public class ButtonFunctionality : MonoBehaviour
 {
-    
-    public float upDistance;
-    public int animationSpeed;
+    public GameObject previewObject;
+    public int previewID;
 
     public bool switchScene;
     public string sceneName;
     public bool exitGame;
-    public bool showSliders;
-    public bool returnToMenuButtons;
+    public bool preview;
 
-    private Vector3 pos;
-    private Vector3 startPos;
+    public bool showHighlight;
+    public GameObject highlight;
 
     void Awake()
     {
+        if (showHighlight)
+        {
+            highlight.SetActive(false);
+        }
+        if(highlight == null)
+        {
+            highlight = new GameObject();
+        }
+        if(previewObject == null)
+        {
+            previewObject = new GameObject();
+        }
     }
 
     void Update()
@@ -31,6 +41,12 @@ public class ButtonFunctionality : MonoBehaviour
      */
     void OnTriggerEnter(Collider other)
     {
+        if(showHighlight)
+        {
+            highlight.SetActive(true);
+        }
+        
+
         Debug.Log("Touched by: " + other.gameObject.name);
         if (switchScene)
         {
@@ -40,49 +56,23 @@ public class ButtonFunctionality : MonoBehaviour
         {
             Application.Quit();
         }
-        if(showSliders)
+        if(preview)
         {
-            StartCoroutine(ScaleAnimation(transform.parent.gameObject, false));
+            ShowPreview();
         }
     }
 
-   /* void OnMouseEnter()
+    void OnTriggerExit(Collider other)
     {
-        if (switchScene)
+        if (showHighlight)
         {
-            SceneManager.LoadScene(sceneName);
-        }
-        if (showSliders)
-        {
-            StartCoroutine(ScaleAnimation(transform.parent.gameObject, false));
+            highlight.SetActive(false);
         }
     }
-    */
-    IEnumerator ScaleAnimation(GameObject obj, bool scaleSetting)
+
+    void ShowPreview()
     {
-        float scaleValue = transform.parent.localScale.x;
-
-        for (float i = 10; i == 0; i--)
-        {
-            Debug.Log("setting new scale");
-            
-            scaleValue -= 1 / animationSpeed;
-            
-            obj.transform.localScale = new Vector3(scaleValue, 1f, 1f);
-            yield return new WaitForEndOfFrame();
-        }
-
-        obj.transform.localScale = Vector3.zero;
-    }
-
-    IEnumerator MoveAnimation(GameObject obj, bool moveSetting)
-    {
-        float posValue;
-
-        for (int i = 0; i < animationSpeed; i++)
-        {
-            obj.transform.Translate(Vector3.up * (upDistance/animationSpeed));
-            yield return new WaitForEndOfFrame();
-        }
+        Debug.Log("switching preview");
+        previewObject.GetComponent<MenuPreviewer>().SwitchPreview(previewID);
     }
 }
