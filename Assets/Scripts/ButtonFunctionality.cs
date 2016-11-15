@@ -10,30 +10,15 @@ public class ButtonFunctionality : MonoBehaviour
     public bool switchScene;
     public string sceneName;
     public bool exitGame;
-    public bool preview;
 
-    public bool showHighlight;
     public GameObject highlight;
 
     void Awake()
     {
-        if (showHighlight)
+        if (highlight != null)
         {
             highlight.SetActive(false);
         }
-        if(highlight == null)
-        {
-            highlight = new GameObject();
-        }
-        if(previewObject == null)
-        {
-            previewObject = new GameObject();
-        }
-    }
-
-    void Update()
-    {
-
     }
     /*
      * Method for button functionality such as Loading a new scene
@@ -41,13 +26,10 @@ public class ButtonFunctionality : MonoBehaviour
      */
     void OnTriggerEnter(Collider other)
     {
-        if(showHighlight)
+        if(highlight != null)
         {
             highlight.SetActive(true);
         }
-        
-
-        Debug.Log("Touched by: " + other.gameObject.name);
         if (switchScene)
         {
             SceneManager.LoadScene(sceneName);
@@ -56,7 +38,7 @@ public class ButtonFunctionality : MonoBehaviour
         {
             Application.Quit();
         }
-        if(preview)
+        if(previewObject != null)
         {
             ShowPreview();
         }
@@ -64,7 +46,7 @@ public class ButtonFunctionality : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (showHighlight)
+        if (highlight != null)
         {
             highlight.SetActive(false);
         }
@@ -72,7 +54,6 @@ public class ButtonFunctionality : MonoBehaviour
 
     void ShowPreview()
     {
-        Debug.Log("switching preview");
         previewObject.GetComponent<MenuPreviewer>().SwitchPreview(previewID);
     }
 }

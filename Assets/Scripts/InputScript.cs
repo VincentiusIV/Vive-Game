@@ -8,12 +8,17 @@ public class InputScript : MonoBehaviour
     SteamVR_TrackedObject trackedObj;
     SteamVR_Controller.Device device;
 
+    public GameObject pointer;
     private Animator animator;
     // Use this for initialization
     void Awake ()
     {
         trackedObj = GetComponent<SteamVR_TrackedObject>();
         animator = GetComponent<Animator>();
+        if(pointer != null)
+        {
+            pointer.SetActive(false);
+        }
     }
 	
 	// Update is called once per frame
@@ -44,6 +49,17 @@ public class InputScript : MonoBehaviour
         if(device.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
         {
             Debug.Log("you touched the touchpad");
+            if (pointer != null)
+            {
+                pointer.SetActive(true);
+            }
+        }
+        if(device.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad))
+        {
+            if (pointer != null)
+            {
+                pointer.SetActive(false);
+            }
         }
     }
 
@@ -81,8 +97,7 @@ public class InputScript : MonoBehaviour
             // runs when trigger is held down
             if (device.GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
             {
-                //col.attachedRigidbody.isKinematic = true;
-                col.attachedRigidbody.useGravity = false;
+                col.attachedRigidbody.isKinematic = true;
                 col.gameObject.transform.SetParent(this.gameObject.transform);
             }
 
@@ -90,8 +105,8 @@ public class InputScript : MonoBehaviour
             if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
             {
                 col.gameObject.transform.SetParent(null);
-                //col.attachedRigidbody.isKinematic = false;
-                col.attachedRigidbody.useGravity = true;
+                col.attachedRigidbody.isKinematic = false;
+
                 Debug.Log("parents were" + col.gameObject.transform.parent.name);
                 if (col.attachedRigidbody != null)
                 {
