@@ -345,6 +345,7 @@ MonoBehaviour:
   sceneName: 
   exitGame: 0
   highlight: {fileID: 1762774156}
+  tutorialLink: {fileID: 0}
 --- !u!23 &114252697
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -860,7 +861,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 427362215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.341, y: 1.8410001, z: -0.55699974}
+  m_LocalPosition: {x: -0.341, y: 2.139, z: -2.233}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1152,6 +1153,7 @@ MonoBehaviour:
   sceneName: 
   exitGame: 0
   highlight: {fileID: 406971120}
+  tutorialLink: {fileID: 0}
 --- !u!23 &560442173
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1327,6 +1329,7 @@ MonoBehaviour:
   sceneName: office2
   exitGame: 0
   highlight: {fileID: 1806221785}
+  tutorialLink: {fileID: 0}
 --- !u!23 &597136168
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1622,6 +1625,7 @@ MonoBehaviour:
   sceneName: office2
   exitGame: 0
   highlight: {fileID: 775871293}
+  tutorialLink: {fileID: 0}
 --- !u!23 &622676094
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2190,9 +2194,11 @@ GameObject:
   - 135: {fileID: 775962179}
   - 23: {fileID: 775962178}
   - 54: {fileID: 775962177}
+  - 114: {fileID: 775962183}
+  - 82: {fileID: 775962182}
   m_Layer: 0
-  m_Name: Sphere
-  m_TagString: Untagged
+  m_Name: CompanionSphere
+  m_TagString: TutorialObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2273,6 +2279,100 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+--- !u!82 &775962182
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 775962176}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 47b4dbd440edfc241b0948a18fb5db92, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.77
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &775962183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 775962176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c011bfac25bcc0e45a40a6f805da9e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wellDoneSound: {fileID: 8300000, guid: af546baff538ffd499a086b447872bcc, type: 3}
+  voice:
+  - {fileID: 8300000, guid: 47b4dbd440edfc241b0948a18fb5db92, type: 3}
+  - {fileID: 8300000, guid: b0d9a4e41bf04fb49a7878cdee93f371, type: 3}
+  - {fileID: 8300000, guid: ab131075cd857d246a889d1ea7c61107, type: 3}
+  - {fileID: 8300000, guid: ec99f6f637e1e074a983e0147673e1ac, type: 3}
+  - {fileID: 8300000, guid: effa6fb0cda0c9d45bb10e1fc201f643, type: 3}
+  - {fileID: 8300000, guid: 0e1a4288022c140479fd8bba98d65677, type: 3}
+  - {fileID: 8300000, guid: 033ef974487abaa429fa993df84f5861, type: 3}
 --- !u!1001 &787986144
 Prefab:
   m_ObjectHideFlags: 0
@@ -2419,6 +2519,7 @@ MonoBehaviour:
   sceneName: 
   exitGame: 0
   highlight: {fileID: 1124102746}
+  tutorialLink: {fileID: 0}
 --- !u!23 &853670327
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2692,6 +2793,7 @@ MonoBehaviour:
   sceneName: 
   exitGame: 1
   highlight: {fileID: 1980266243}
+  tutorialLink: {fileID: 0}
 --- !u!23 &880566255
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3579,6 +3681,7 @@ MonoBehaviour:
   sceneName: office2
   exitGame: 0
   highlight: {fileID: 1263161900}
+  tutorialLink: {fileID: 0}
 --- !u!23 &1072666053
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4545,11 +4648,17 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010929694164, guid: 135858e5845d73e44bc87cdc619d930b,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 64000010700492660, guid: 135858e5845d73e44bc87cdc619d930b, type: 2}
     - {fileID: 64000012243212802, guid: 135858e5845d73e44bc87cdc619d930b, type: 2}
     - {fileID: 135000010116521666, guid: 135858e5845d73e44bc87cdc619d930b, type: 2}
     - {fileID: 135000012936572798, guid: 135858e5845d73e44bc87cdc619d930b, type: 2}
+    - {fileID: 114000010929694164, guid: 135858e5845d73e44bc87cdc619d930b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 135858e5845d73e44bc87cdc619d930b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1475956724
@@ -4859,6 +4968,7 @@ MonoBehaviour:
   sceneName: 
   exitGame: 0
   highlight: {fileID: 2072230315}
+  tutorialLink: {fileID: 0}
 --- !u!23 &1538588220
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6218,6 +6328,7 @@ MonoBehaviour:
   sceneName: 
   exitGame: 0
   highlight: {fileID: 325386011}
+  tutorialLink: {fileID: 775962176}
 --- !u!23 &2032769792
 MeshRenderer:
   m_ObjectHideFlags: 0

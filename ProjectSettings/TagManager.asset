@@ -12,6 +12,7 @@ TagManager:
   - Hand
   - HMD
   - FixedObject
+  - TutorialObject
   layers:
   - Default
   - TransparentFX

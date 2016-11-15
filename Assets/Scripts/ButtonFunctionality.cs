@@ -10,10 +10,12 @@ public class ButtonFunctionality : MonoBehaviour
     public bool switchScene;
     public string sceneName;
     public bool exitGame;
-
+    
     private AudioSource selectSound;
 
     public GameObject highlight;
+
+    public GameObject tutorialLink;
 
     void Awake()
     {
@@ -46,6 +48,10 @@ public class ButtonFunctionality : MonoBehaviour
         if(previewObject != null)
         {
             ShowPreview();
+        }
+        if(tutorialLink != null)
+        {
+            tutorialLink.GetComponent<Tutorial>().StartTutorial();
         }
     }
 

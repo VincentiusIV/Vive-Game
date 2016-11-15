@@ -69,6 +69,17 @@ public class InputScript : MonoBehaviour
         {
             return;
         }
+        else if(col.CompareTag("TutorialObject"))
+        {
+            if(device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+            {
+                col.GetComponent<Tutorial>().StartTutorial();
+            }
+            if(device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+            {
+                col.GetComponent<Tutorial>().StartPinchTutorial();
+            }
+        }
         else if(col.CompareTag("InteractableArea"))
         {
             if (col.name == "PinchArea")
