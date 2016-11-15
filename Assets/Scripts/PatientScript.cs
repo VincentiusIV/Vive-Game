@@ -24,14 +24,16 @@ public class PatientScript : MonoBehaviour
     private int timeUnsucCompres;
     private float respirationStatus;
     private IEnumerator effectCoroutine;
-
     private int effectiveness;
     private int chance;
     private int chanceInrease;
+
     private bool inCondition;
     private bool pushed;
     private bool needsRespiration;
     private bool isNosePinched;
+
+    private Animator bodyController;
     private AudioSource IsAliveSound;
 
     // Use this for initialization
@@ -49,6 +51,7 @@ public class PatientScript : MonoBehaviour
         effectiveness = 5;
 
         IsAliveSound = GetComponent<AudioSource>();
+        bodyController = GetComponent<Animator>();
 	}
 
     void Update()
@@ -60,14 +63,16 @@ public class PatientScript : MonoBehaviour
                 progressBar.transform.localScale = new Vector3(timer / 100, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
                 GetComponent<Rigidbody>().isKinematic = true;
             }
-            if (pushArea.GetComponent<AddForce>().uncompressed == true && pushed == true)
+            if (pushArea.GetComponent<AddForce>().uncompressed && pushed == true)
             {
+                SwitchAnimation("Compression", false);
                 pushed = false;
             }
             if (pushArea.GetComponent<AddForce>().compressed && pushed == false)
             {
-                increaseForPush();
+                SwitchAnimation("Compression", true);
                 pushed = true;
+                increaseForPush();
             }
         }
 
@@ -103,30 +108,37 @@ public class PatientScript : MonoBehaviour
 
     public void increaseForPush()
     {
-        timeCompres += 1;
-
-        if(timer <= 90)
+        if(needsRespiration)
         {
-            timer += effectiveness;
-
-            if(effectiveness < 1)
-            {
-                Debug.Log("push unsuccesful");
-                timeUnsucCompres += 1;
-                redLight.SetActive(true);
-                StartCoroutine(OffAfterSeconds(0.5f, redLight));
-            }
-            if(effectiveness > 1)
-            {
-                heartMonitorSound.Play();
-                Debug.Log("push succesful");
-                timeSucCompres += 1;
-                greenLight.SetActive(true);
-                StartCoroutine(OffAfterSeconds(0.5f, greenLight));
-            }
+            timer -= 5;
         }
-        StopCoroutine(effectCoroutine);
-        StartCoroutine(effectCoroutine);
+        else
+        {
+            timeCompres += 1;
+
+            if (timer <= 90)
+            {
+                timer += effectiveness;
+
+                if (effectiveness < 1)
+                {
+                    Debug.Log("push unsuccesful");
+                    timeUnsucCompres += 1;
+                    redLight.SetActive(true);
+                    StartCoroutine(OffAfterSeconds(0.5f, redLight));
+                }
+                if (effectiveness > 1)
+                {
+                    heartMonitorSound.Play();
+                    Debug.Log("push succesful");
+                    timeSucCompres += 1;
+                    greenLight.SetActive(true);
+                    StartCoroutine(OffAfterSeconds(0.5f, greenLight));
+                }
+            }
+            StopCoroutine(effectCoroutine);
+            StartCoroutine(effectCoroutine);
+        }
     }
     public void respiration()
     {
@@ -168,6 +180,11 @@ public class PatientScript : MonoBehaviour
         _light.SetActive(false);
     }
 
+    void SwitchAnimation(string varName, bool value)
+    {
+        bodyController.SetBool(varName, value);
+    }
+
     void PatientIsHealthy()
     {
         inCondition = false;
@@ -177,12 +194,13 @@ public class PatientScript : MonoBehaviour
         IsAliveSound.Play();
         IsAliveSound.loop = true;
 
+        SwitchAnimation("Breathe", true);
+
         if(heartMonitorSound.isPlaying == false)
         {
             heartMonitorSound.loop = true;
             heartMonitorSound.Play();
-        }
-        
+        } 
     }
 
     void PatientIsDead()
