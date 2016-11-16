@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+// Script to preview menu items such as a scene or patient
 public class MenuPreviewer : MonoBehaviour
 {
+    // Array of all the possible preview options
     public GameObject[] previewObjects;
 
     public bool hasAnimation;
@@ -13,6 +14,7 @@ public class MenuPreviewer : MonoBehaviour
         turnOffPreviews();
     }
 
+    // Called from a button when its touched, hands the item id as a parameter
     public void SwitchPreview(int id)
     {
         turnOffPreviews();
@@ -24,6 +26,7 @@ public class MenuPreviewer : MonoBehaviour
         }
     }
 
+    // All previews are turned off
     void turnOffPreviews()
     {
         foreach (GameObject item in previewObjects)
