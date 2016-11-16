@@ -22,7 +22,7 @@ GameObject:
   - 33: {fileID: 33000011434975456}
   - 23: {fileID: 23000012483675792}
   m_Layer: 0
-  m_Name: LaserPointer (2)
+  m_Name: LaserPointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
