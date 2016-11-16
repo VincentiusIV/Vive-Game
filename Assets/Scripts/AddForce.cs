@@ -37,15 +37,20 @@ public class AddForce : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.name == upTrigger.name)
-        {
-            uncompressed = true;
-            compressed = false;
-        }
-        if(col.name == downTrigger.name)
+        
+        if (col.name == downTrigger.name)
         {
             compressed = true;
             uncompressed = false;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.name == downTrigger.name)
+        {
+            uncompressed = true;
+            compressed = false;
         }
     }
 }

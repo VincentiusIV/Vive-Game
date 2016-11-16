@@ -77,19 +77,35 @@ public class PatientScript : MonoBehaviour
                 GetComponent<Rigidbody>().isKinematic = true;
                 SwitchActive(true);
             }
-            if (pushArea.GetComponent<AddForce>().uncompressed && pushed == true)
+            if (pushArea.GetComponent<AddForce>().uncompressed)
             {
-                SwitchAnimation("Compression", false);
-                pushed = false;
+                bodyController.SetBool("Compression", false);
+
+                if (pushed)
+                {
+                    pushed = false;
+                }
             }
-            if (pushArea.GetComponent<AddForce>().compressed && pushed == false)
+            if (pushArea.GetComponent<AddForce>().uncompressed == false)
             {
-                SwitchAnimation("Compression", true);
-                pushed = true;
-                increaseForPush();
+                bodyController.SetBool("Compression", true);
+
+                if(pushed == false)
+                {
+                    pushed = true;
+                    increaseForPush();
+                }
             }
         }
 
+        if(isNosePinched)
+        {
+            bodyController.SetBool("Chin Lift", true);
+        }
+        else
+        {
+            bodyController.SetBool("Chin Lift", false);
+        }
         if (currentHealth > totalHealth)
         {
             currentHealth = totalHealth;
@@ -178,6 +194,7 @@ public class PatientScript : MonoBehaviour
     public void pinchNose(bool value)
     {
         isNosePinched = value;
+        
     }
 
     IEnumerator checkEffective()
@@ -207,11 +224,6 @@ public class PatientScript : MonoBehaviour
         }
     }
 
-    void SwitchAnimation(string varName, bool value)
-    {
-        bodyController.SetBool(varName, value);
-    }
-
     void SwitchActive(bool value)
     {
         if(pushArea.gameObject.activeInHierarchy != value)
@@ -226,8 +238,7 @@ public class PatientScript : MonoBehaviour
         inCondition = false;
         currentHealth = 90;
         effectText.GetComponent<TextMesh>().text = "Patient alive";
-
-        SwitchAnimation("Breathe", true);
+        bodyController.SetBool("Breathe", true);
 
         StartCoroutine(HeartRateSound());
     }

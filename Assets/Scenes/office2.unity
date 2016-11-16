@@ -456,7 +456,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 145200514}
-  m_Text: Bami
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -4807,6 +4807,7 @@ GameObject:
   - 4: {fileID: 1457763936}
   - 33: {fileID: 1457763938}
   - 23: {fileID: 1457763937}
+  - 65: {fileID: 1457763939}
   m_Layer: 0
   m_Name: Box003_Box003_auv
   m_TagString: Untagged
@@ -4865,6 +4866,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1457763935}
   m_Mesh: {fileID: 4300012, guid: 508cb8be8d1288e43b08488432dc7a32, type: 3}
+--- !u!65 &1457763939
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1457763935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.953445, y: 0.7160895, z: 3.8842087}
+  m_Center: {x: 0.0011332035, y: 0.1347866, z: 0.73010594}
 --- !u!1 &1475827937
 GameObject:
   m_ObjectHideFlags: 0
@@ -5079,7 +5092,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000013047648826, guid: cad271af81a096f438acd19b3284a065, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.91
+      value: -1.599
       objectReference: {fileID: 0}
     - target: {fileID: 4000013047648826, guid: cad271af81a096f438acd19b3284a065, type: 2}
       propertyPath: m_LocalPosition.y
@@ -5087,7 +5100,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013047648826, guid: cad271af81a096f438acd19b3284a065, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.928
+      value: -2.924
       objectReference: {fileID: 0}
     - target: {fileID: 4000013047648826, guid: cad271af81a096f438acd19b3284a065, type: 2}
       propertyPath: m_LocalRotation.x
