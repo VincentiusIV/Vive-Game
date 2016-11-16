@@ -69,17 +69,6 @@ public class InputScript : MonoBehaviour
         {
             return;
         }
-        else if(col.CompareTag("TutorialObject"))
-        {
-            if(device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
-            {
-                col.GetComponent<Tutorial>().StartTutorial();
-            }
-            if(device.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
-            {
-                col.GetComponent<Tutorial>().StartPinchTutorial();
-            }
-        }
         else if(col.CompareTag("InteractableArea"))
         {
             if (col.name == "PinchArea")
@@ -110,6 +99,11 @@ public class InputScript : MonoBehaviour
             {
                 col.attachedRigidbody.isKinematic = true;
                 col.gameObject.transform.SetParent(this.gameObject.transform);
+
+                if(col.CompareTag("TutorialObject"))
+                {
+                    col.GetComponent<Tutorial>().StartTutorial();
+                }
             }
 
             // runs when trigger is released
@@ -123,6 +117,11 @@ public class InputScript : MonoBehaviour
                 {
                     tossObject(col.attachedRigidbody);
                 }
+            }
+
+            if(device.GetPressDown(SteamVR_Controller.ButtonMask.Grip) && col.CompareTag("TutorialObject"))
+            {
+                col.GetComponent<Tutorial>().StartPinchTutorial();
             }
         }
     }
