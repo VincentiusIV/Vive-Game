@@ -21,7 +21,6 @@ public class Tutorial : MonoBehaviour {
             sound.clip = voice[1];
             sound.Play();
             phaseCounter++;
-            Debug.Log("Phase: "+phaseCounter);
         }
     }
    
@@ -31,7 +30,6 @@ public class Tutorial : MonoBehaviour {
         {
             StartCoroutine(GrabTutorial());
             phaseCounter++;
-            Debug.Log("Phase: " + phaseCounter);
         }
     }
 
@@ -54,7 +52,6 @@ public class Tutorial : MonoBehaviour {
         {
             StartCoroutine(PinchTutorial());
             phaseCounter++;
-            Debug.Log("Phase: " + phaseCounter);
         }
     }
 

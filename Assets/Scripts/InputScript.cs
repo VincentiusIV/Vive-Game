@@ -109,7 +109,6 @@ public class InputScript : MonoBehaviour
             // runs when trigger is released
             if (device.GetTouchUp(SteamVR_Controller.ButtonMask.Trigger))
             {
-                Debug.Log("parents were" + col.gameObject.transform.parent.name);
                 col.gameObject.transform.SetParent(null);
                 col.attachedRigidbody.isKinematic = false;
 
