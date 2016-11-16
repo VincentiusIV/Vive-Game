@@ -102,7 +102,7 @@ public class InputScript : MonoBehaviour
 
                 if(col.CompareTag("TutorialObject"))
                 {
-                    col.GetComponent<Tutorial>().StartTutorial();
+                    col.GetComponent<Tutorial>().StartPinchTutorial();
                 }
             }
 
@@ -121,7 +121,7 @@ public class InputScript : MonoBehaviour
 
             if(device.GetPressDown(SteamVR_Controller.ButtonMask.Grip) && col.CompareTag("TutorialObject"))
             {
-                col.GetComponent<Tutorial>().StartPinchTutorial();
+                col.GetComponent<Tutorial>().EndTutorial();
             }
         }
     }
