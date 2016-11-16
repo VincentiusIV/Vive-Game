@@ -73,7 +73,7 @@ public class Tutorial : MonoBehaviour {
 
     public void EndTutorial()
     {
-        sound.clip = voice[5];
+        sound.clip = voice[6];
         sound.Play();
     }
 }
