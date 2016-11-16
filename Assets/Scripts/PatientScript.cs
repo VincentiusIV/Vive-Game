@@ -116,7 +116,6 @@ public class PatientScript : MonoBehaviour
             {
                 currentHealth = 0.0f;
             }
-            
         }
 
         if(Input.GetButtonDown("Cancel"))
@@ -145,7 +144,7 @@ public class PatientScript : MonoBehaviour
                     redLight.SetActive(true);
                     StartCoroutine(OffAfterSeconds(0.5f, redLight));
                 }
-                if (effectiveness == 5)
+                else if (effectiveness == 5)
                 {
                     heartMonitorSound.Play();
                     timeSucCompres += 1;
@@ -186,11 +185,11 @@ public class PatientScript : MonoBehaviour
         float timeBetween = 0.33f;
         effectiveness = -5;
         yield return new WaitForSeconds(timeBetween);
-        effectiveness = 0;
+        effectiveness = -1;
         yield return new WaitForSeconds(timeBetween);
         effectiveness = 5;
         yield return new WaitForSeconds(timeBetween);
-        effectiveness = 3;
+        effectiveness = 0;
     }
 
     IEnumerator OffAfterSeconds(float sec, GameObject _obj)
