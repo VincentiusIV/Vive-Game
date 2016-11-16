@@ -241,7 +241,7 @@ public class PatientScript : MonoBehaviour
         if(heartMonitorSound.isPlaying == false && heartMonitorSound.clip != deathSound)
         {
             heartMonitorSound.clip = deathSound;
-            heartMonitorSound.loop = true;
+            heartMonitorSound.loop = false;
             heartMonitorSound.Play();
         }
     }
