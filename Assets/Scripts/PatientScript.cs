@@ -10,6 +10,10 @@ public class PatientScript : MonoBehaviour
     public GameObject greenLight;
     public GameObject redLight;
 
+    public GameObject goodPushText;
+    public GameObject badPushText;
+    public GameObject totalPushText;
+
     public Transform pushArea;
     public Transform pinchArea;
 
@@ -57,6 +61,10 @@ public class PatientScript : MonoBehaviour
 
     void Update()
     {
+        goodPushText.GetComponent<TextMesh>().text = "Good Pushes: " + timeSucCompres;
+        badPushText.GetComponent<TextMesh>().text = "Bad Pushes: " + timeUnsucCompres;
+        totalPushText.GetComponent<TextMesh>().text = "Total Pushes: " + timeCompres;
+
         if (inCondition)
         {
             if(needsRespiration == false)
