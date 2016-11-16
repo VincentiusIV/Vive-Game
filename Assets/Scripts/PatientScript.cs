@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/* This class handles the behaviour for the Patient
+ * 
+ * Included functions are pushing chest, squeezing nose&breathing,
+ * effects on certain occasions, visual feedback with the progressbar, etc.
+ * */
 public class PatientScript : MonoBehaviour
 {
     public GameObject progressBar;
@@ -40,7 +45,7 @@ public class PatientScript : MonoBehaviour
 
     private Animator bodyController;
 
-    // Use this for initialization
+    // A lot of variables are assigned to when the script starts
     void Start()
     {
         greenLight.SetActive(false);
@@ -67,16 +72,22 @@ public class PatientScript : MonoBehaviour
 
         if (inCondition)
         {
+            // Updates text only when the patient does not need respiration
             if(needsRespiration == false)
             {
                 effectText.GetComponent<TextMesh>().text = "Effectiveness: " + effectiveness;
             }
+            // progressbar is only updated when patient is on stretcher
             if (isOnStretcher)
             {
                 progressBar.transform.localScale = new Vector3(currentHealth / totalHealth, progressBar.transform.localScale.y, progressBar.transform.localScale.z);
                 GetComponent<Rigidbody>().isKinematic = true;
                 SwitchActive(true);
             }
+            /* Handles the body chest compression animations and increaseForPush() function
+             * boolean pushed is used so the player cannot keep their hand inside the patient
+             * and still revive it
+             * */
             if (pushArea.GetComponent<AddForce>().uncompressed)
             {
                 bodyController.SetBool("Compression", false);
@@ -98,6 +109,7 @@ public class PatientScript : MonoBehaviour
             }
         }
 
+        // Handles the Chin lift animation when nose is pinched
         if(isNosePinched)
         {
             bodyController.SetBool("Chin Lift", true);
@@ -106,7 +118,10 @@ public class PatientScript : MonoBehaviour
         {
             bodyController.SetBool("Chin Lift", false);
         }
-        if (currentHealth > totalHealth)
+
+        // Checks the state of the patient
+        // when health is above total health, player has a chance to respire the patient
+        if (currentHealth > totalHealth && inCondition)
         {
             currentHealth = totalHealth;
             chance = Random.Range(chanceInrease, 5);
@@ -118,7 +133,8 @@ public class PatientScript : MonoBehaviour
                 effectText.GetComponent<TextMesh>().text = "Respire now";
             }
         }
-        else if(currentHealth <= 0)
+        // Handles state of the patient
+        else if(currentHealth <= 0 && inCondition)
         {
             PatientIsDead();
         }
@@ -134,12 +150,16 @@ public class PatientScript : MonoBehaviour
             }
         }
 
+        // Shortcut for testing without Vive
         if(Input.GetButtonDown("Cancel"))
         {
             PatientIsHealthy();
         }
     }
 
+    // Handles the calculation for each push
+    // the effectiveness is done in a coroutine to wait for seconds
+    // between each value
     public void increaseForPush()
     {
         if(needsRespiration)
@@ -174,6 +194,8 @@ public class PatientScript : MonoBehaviour
         }
     }
 
+    // Function for respiration runs when its needed 
+    // and the nose is pinched
     public void respiration()
     {
         if(needsRespiration && isNosePinched)
@@ -191,12 +213,14 @@ public class PatientScript : MonoBehaviour
         }
     }
 
+    // called from the InputScript when grip button is pressed in an interactable area (tag)
     public void pinchNose(bool value)
     {
         isNosePinched = value;
-        
     }
 
+    // Determines the effectiveness value
+    // after exactly 2/3 of a second the push is the most effective which is the right rhythym
     IEnumerator checkEffective()
     {
         float timeBetween = 0.33f;
@@ -209,12 +233,14 @@ public class PatientScript : MonoBehaviour
         effectiveness = 0;
     }
 
+    // Turns off the light on the hand after a given amount of seconds
     IEnumerator OffAfterSeconds(float sec, GameObject _obj)
     {
         yield return new WaitForSeconds(sec);
         _obj.SetActive(false);
     }
 
+    // Makes the heart rate sound play 10 times after the patient is determined alive
     IEnumerator HeartRateSound()
     {
         for (int i = 0; i < 10; i++)
@@ -224,6 +250,7 @@ public class PatientScript : MonoBehaviour
         }
     }
 
+    // Switches the push and pinch area active when patient is on stretcher
     void SwitchActive(bool value)
     {
         if(pushArea.gameObject.activeInHierarchy != value)
@@ -233,6 +260,7 @@ public class PatientScript : MonoBehaviour
         }
     }
 
+    // Function when patient is alive, and player wins
     void PatientIsHealthy()
     {
         inCondition = false;
@@ -243,6 +271,7 @@ public class PatientScript : MonoBehaviour
         StartCoroutine(HeartRateSound());
     }
 
+    // Function when patient is dead, and player loses
     void PatientIsDead()
     {
         currentHealth = 0;
