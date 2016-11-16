@@ -27,6 +27,8 @@ public class InputScript : MonoBehaviour
         device = SteamVR_Controller.Input((int)trackedObj.index);
     }
 
+    //Runs every frame and handles the animation for the controllers when certain buttons are pressed.
+
     void Update()
     {
         if (device.GetTouch(SteamVR_Controller.ButtonMask.Trigger))
@@ -63,6 +65,11 @@ public class InputScript : MonoBehaviour
         }
     }
 
+    /*
+     * OnTriggerStay is called whenever an object with a trigger collider collides with something else (the parameter col)
+     * It handles determination of the colliding object, va the means of tags attached to objects.
+     * Based on said determination, it will perform actions corresponding with the object it's colliding with.
+     */
     void OnTriggerStay(Collider col)
     {
         if (col.tag == "VrController")
@@ -125,6 +132,8 @@ public class InputScript : MonoBehaviour
         }
     }
 
+
+    //Method to determine which animation should be performed.
     void SetAnimation(String varName, bool whenIts, bool ItShouldBe)
     {
         if (animator.GetBool(varName) == whenIts)
@@ -133,6 +142,7 @@ public class InputScript : MonoBehaviour
         }
     }
 
+    //Method used for throwing away objects, it uses the velocity of the controller to determine the velocity of the object that gets thrown away.
     public void tossObject(Rigidbody rigidbody)
     {
         Transform origin = trackedObj.origin ? trackedObj.origin : trackedObj.transform.parent;
