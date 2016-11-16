@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Tutorial : MonoBehaviour {
-
+/* Script that switches between voices of the tutorial
+ * a new phase is called when the player does the right action
+ * for example if the pink ball is grabbed using trigger button, next phase is started
+ * coroutines are used to combine sound clips and wait for each sound to play out
+ * */ 
+public class Tutorial : MonoBehaviour
+{
     public AudioClip wellDoneSound;
     public AudioClip[] voice;
     private AudioSource sound;
     public int phaseCounter;
-	// Use this for initialization
+
 	void Awake ()
     {
         sound = GetComponent<AudioSource>();
@@ -72,5 +77,6 @@ public class Tutorial : MonoBehaviour {
     {
         sound.clip = voice[6];
         sound.Play();
+        phaseCounter++;
     }
 }

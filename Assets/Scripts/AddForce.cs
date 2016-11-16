@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Small script that determines when the chest of the patient is compressed or not
 public class AddForce : MonoBehaviour {
 
     private Rigidbody rb;
     private Transform tf;
 
-    public GameObject upTrigger;
     public GameObject downTrigger;
 
     public bool uncompressed;
-    public bool compressed;
     
 	// Use this for initialization
 	void Awake ()
@@ -19,38 +18,33 @@ public class AddForce : MonoBehaviour {
         tf = GetComponent<Transform>(); 
     }
 	
-	// Update is called once per frame
+	// Permanently fixes the rotation of the object
 	void Update ()
     {
         tf.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+
+        // Makes it able to test CPR without Vive
         if (Input.GetButtonDown("Jump"))
         {
-            //rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.down * 10.0f, ForceMode.Force);
-        }
-        if (Input.GetButtonUp("Jump"))
-        {
-            // tf.transform.position = Vector3.zero;
-            //rb.velocity.Normalize();
         }
 	}
 
+    // when collider enters downtrigger, chest is compressed
     void OnTriggerEnter(Collider col)
     {
-        
         if (col.name == downTrigger.name)
         {
-            compressed = true;
             uncompressed = false;
         }
     }
 
+    // when collider leaves the downtrigger, chest is uncompressed
     void OnTriggerExit(Collider col)
     {
         if (col.name == downTrigger.name)
         {
             uncompressed = true;
-            compressed = false;
         }
     }
 }

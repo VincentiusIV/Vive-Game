@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+// Handles behaviour for buttons
+// Buttons can preview items, switch scenes, exit game, play a sound, show a highlight and be part of the tutorial
 public class ButtonFunctionality : MonoBehaviour
 {
     public GameObject previewObject;
@@ -25,10 +27,8 @@ public class ButtonFunctionality : MonoBehaviour
         }
         selectSound = GetComponent<AudioSource>();
     }
-    /*
-     * Method for button functionality such as Loading a new scene
-     * runs when the button is colliding with the Vive Controller
-     */
+
+    //runs when the button is colliding with the Vive Controller 
     void OnTriggerEnter(Collider other)
     {
         selectSound.Play();

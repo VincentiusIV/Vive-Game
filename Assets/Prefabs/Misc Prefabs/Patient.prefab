@@ -390,6 +390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upTrigger: {fileID: 1000011756390460}
   downTrigger: {fileID: 1000012331605396}
+  uncompressed: 0
+  compressed: 0
 --- !u!114 &114000013136061304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -402,9 +404,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 0}
-  EffectText: {fileID: 0}
+  respirationBar: {fileID: 0}
+  effectText: {fileID: 0}
+  greenLight: {fileID: 0}
+  redLight: {fileID: 0}
+  goodPushText: {fileID: 0}
+  badPushText: {fileID: 0}
+  totalPushText: {fileID: 0}
   pushArea: {fileID: 4000010739995046}
   pinchArea: {fileID: 4000010232338846}
+  heartMonitorSound: {fileID: 0}
+  deathSound: {fileID: 0}
   isOnStretcher: 0
 --- !u!135 &135000012994905716
 SphereCollider:

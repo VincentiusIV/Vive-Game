@@ -14,13 +14,14 @@ public class CompareTags : MonoBehaviour
     {
         GetComponent<MeshRenderer>().enabled = false;
     }
+
     void OnTriggerStay(Collider col)
     {
+        // enables mesh renderer to preview an overlay of the object that can be snapped into place there
         GetComponent<MeshRenderer>().enabled = true;
         
         if(isRespirationArea)
         {
-            Debug.Log("called patient function");
             transform.parent.GetComponent<PatientScript>().respiration();
         }
         if(snapableObject == col.tag && canSnap)
@@ -29,11 +30,13 @@ public class CompareTags : MonoBehaviour
         }
     }
 
+    // disables meshrenderer when there is no more collision
     void OnTriggerExit(Collider col)
     {
         GetComponent<MeshRenderer>().enabled = false;
     }
     
+    // Snaps object into position
     private void SnapToPosition(Collider col)
     {
         GetComponent<MeshRenderer>().enabled = false;
